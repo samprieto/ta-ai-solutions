@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quest Keeper – TA AI Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fff;
+      --bg-subtle: #f7f8fa;
+      --border: #e8eaed;
+      --border-hover: #c2c7cf;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --text-muted: #9ca3af;
+      --radius: 14px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.06);
+      --accent: #d97706;
+      --accent-hover: #b45309;
+      --accent-3: #fbbf24;
+      --accent-light: #fffbeb;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; font-size: 15px; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 1.05rem; color: var(--text-primary);
+      text-decoration: none;
+    }
+    .nav-logo {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: linear-gradient(135deg, #0d9488, #2dd4bf);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 800; font-size: .82rem; letter-spacing: -.5px;
+      flex-shrink: 0;
+    }
+    .nav-back {
+      font-size: .875rem; font-weight: 500; color: var(--accent);
+      text-decoration: none; display: flex; align-items: center; gap: 5px;
+      padding: 6px 14px; border-radius: 8px; transition: background .15s;
+    }
+    .nav-back:hover { background: var(--accent-light); }
+
+    /* HERO */
+    .hero {
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+      padding: 52px 2rem 48px;
+    }
+    .hero-inner { max-width: 1100px; margin: 0 auto; }
+    .breadcrumb {
+      font-size: .8rem; color: var(--text-muted); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .breadcrumb span { color: var(--text-secondary); }
+    .category-tag {
+      display: inline-flex; align-items: center;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;
+      border: 1px solid rgba(217,119,6,.2);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+      letter-spacing: -.03em; line-height: 1.1; margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .hero-desc {
+      font-size: 1.05rem; color: var(--text-secondary);
+      max-width: 680px; margin-bottom: 28px; line-height: 1.65;
+    }
+    .hero-meta {
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: #fef9c3; color: #a16207;
+      font-size: .8rem; font-weight: 600;
+      padding: 5px 13px; border-radius: 20px;
+      border: 1px solid #fde68a;
+    }
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #ca8a04; flex-shrink: 0;
+    }
+    .hero-date { font-size: .85rem; color: var(--text-muted); }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #fff;
+      font-size: .9rem; font-weight: 600;
+      padding: .65rem 1.4rem; border-radius: 10px;
+      text-decoration: none; transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 2px 8px rgba(217,119,6,.3);
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(217,119,6,.4); }
+    .hero-note {
+      margin-top: 10px; font-size: .82rem; color: var(--text-muted); font-style: italic;
+    }
+
+    /* BODY LAYOUT */
+    .body-wrap {
+      max-width: 1100px; margin: 0 auto;
+      padding: 48px 2rem 80px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* MAIN CONTENT */
+    .main-content { min-width: 0; }
+    .section { margin-bottom: 52px; }
+    .section-title {
+      font-size: 1.2rem; font-weight: 700; color: var(--text-primary);
+      margin-bottom: 20px; padding-bottom: 12px;
+      border-bottom: 2px solid var(--accent-light);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::before {
+      content: ''; display: block;
+      width: 4px; height: 20px; border-radius: 2px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .prose p { color: var(--text-secondary); line-height: 1.75; margin-bottom: 14px; }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong { color: var(--text-primary); font-weight: 600; }
+
+    /* Before/After */
+    .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .ba-card {
+      padding: 20px; border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .ba-card.before { background: #fff5f5; border-color: #fecaca; }
+    .ba-card.after { background: var(--accent-light); border-color: rgba(217,119,6,.2); }
+    .ba-label {
+      font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .ba-card.before .ba-label { color: #dc2626; }
+    .ba-card.after .ba-label { color: var(--accent); }
+    .ba-card p { font-size: .88rem; color: var(--text-secondary); line-height: 1.65; }
+
+    /* Feature checklist */
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .feature-list li {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: .92rem; color: var(--text-secondary); line-height: 1.6;
+    }
+    .feature-check {
+      width: 22px; height: 22px; border-radius: 5px;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .feature-list li strong { color: var(--text-primary); font-weight: 600; }
+
+    /* Impact bullets */
+    .impact-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .impact-list li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: .92rem; color: var(--text-secondary); line-height: 1.6;
+    }
+    .impact-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; margin-top: 7px;
+    }
+
+    /* Demo box */
+    .demo-box {
+      background: var(--bg-subtle); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+    }
+    .demo-link-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
+    .demo-note { font-size: .82rem; color: var(--text-muted); font-style: italic; margin-bottom: 20px; }
+    .screenshot-placeholder {
+      background: var(--border); border-radius: 10px;
+      height: 220px; display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); font-size: .85rem; border: 1px dashed var(--border-hover);
+    }
+
+    /* Tech stack */
+    .tech-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .chip {
+      background: var(--bg-subtle); color: var(--text-secondary);
+      border: 1px solid var(--border); border-radius: 8px;
+      font-size: .8rem; font-weight: 500; padding: 5px 12px;
+    }
+    .tech-note {
+      font-size: .84rem; color: var(--text-muted); line-height: 1.65;
+      background: var(--bg-subtle); border-left: 3px solid var(--accent-3);
+      padding: 12px 16px; border-radius: 0 8px 8px 0;
+    }
+
+    /* SIDEBAR */
+    .sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .sidebar-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
+      box-shadow: var(--shadow-md);
+    }
+    .sidebar-card-title {
+      font-size: .75rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 16px;
+    }
+
+    /* Status in sidebar */
+    .sidebar-status-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: #fef9c3; color: #a16207;
+      font-size: .82rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 20px;
+      border: 1px solid #fde68a; margin-bottom: 4px;
+    }
+
+    /* Key metrics */
+    .metric-list { display: flex; flex-direction: column; gap: 12px; }
+    .metric-item { display: flex; flex-direction: column; gap: 2px; }
+    .metric-value { font-size: 1.3rem; font-weight: 700; color: var(--accent); letter-spacing: -.02em; }
+    .metric-label { font-size: .78rem; color: var(--text-muted); }
+
+    /* Tables */
+    .cost-table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    .cost-table th {
+      text-align: left; padding: 8px 10px;
+      background: var(--bg-subtle); color: var(--text-muted);
+      font-weight: 600; font-size: .75rem; letter-spacing: .04em; text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+    .cost-table td { padding: 8px 10px; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
+    .cost-table tr:nth-child(even) td { background: var(--bg-subtle); }
+    .cost-table tr.total-row td { background: var(--accent-light); color: var(--text-primary); font-weight: 700; border-top: 2px solid var(--accent); border-bottom: none; }
+
+    .compare-table { width: 100%; border-collapse: collapse; font-size: .78rem; }
+    .compare-table th {
+      text-align: left; padding: 7px 8px;
+      background: var(--bg-subtle); color: var(--text-muted);
+      font-weight: 600; font-size: .72rem; letter-spacing: .04em; text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-table td { padding: 7px 8px; color: var(--text-secondary); border-bottom: 1px solid var(--border); vertical-align: top; }
+    .compare-table tr:nth-child(even) td { background: var(--bg-subtle); }
+
+    .savings-note {
+      margin-top: 14px; padding: 12px 14px;
+      background: var(--accent-light); border-radius: 8px;
+      font-size: .8rem; color: var(--accent); font-weight: 500; line-height: 1.55;
+      border: 1px solid rgba(217,119,6,.2);
+    }
+
+    /* Links card */
+    .link-list { display: flex; flex-direction: column; gap: 10px; }
+    .link-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .85rem; color: var(--accent); text-decoration: none;
+      font-weight: 500; padding: 8px 10px; border-radius: 8px;
+      transition: background .15s;
+    }
+    .link-item:hover { background: var(--accent-light); }
+    .link-item svg { flex-shrink: 0; }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg-subtle); border-top: 1px solid var(--border);
+      padding: 28px 2rem; text-align: center;
+      font-size: .82rem; color: var(--text-muted);
+    }
+
+    .kpi-sub { font-size:.72rem; color:var(--text-muted); margin-top:.15rem; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: .5rem;
+    }
+    .kpi-cell {
+      background: var(--bg);
+      padding: .85rem .8rem;
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+    }
+    .kpi-cell-value {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -.02em;
+      line-height: 1.2;
+    }
+    .kpi-cell-label {
+      font-size: .7rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 780px) {
+      .body-wrap { grid-template-columns: 1fr; padding: 32px 1.25rem 60px; }
+      .sidebar { order: -1; }
+      .ba-grid { grid-template-columns: 1fr; }
+      .hero { padding: 36px 1.25rem 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">TA</div>
+      <span>TA AI Lab</span>
+    </a>
+    <a href="index.html" class="nav-back">
+      &#8592; Back to AI Solutions
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <span>TA AI Lab</span>
+      <span>›</span>
+      <span>Work Management</span>
+    </div>
+    <div class="category-tag">Work Management</div>
+    <h1>Quest Keeper</h1>
+    <p class="hero-desc">An AI-powered work management system that transforms daily priorities into structured, time-allocated tasks, automatically captured from screenshots, emails, meetings, and transcripts.</p>
+    <div class="hero-meta">
+      <span class="status-pill">
+        <span class="status-dot"></span>
+        In Development
+      </span>
+      <span class="hero-date">May 2026</span>
+    </div>
+    <a href="https://task-forge-saga.lovable.app/" target="_blank" class="btn-primary">
+      Preview Quest Keeper →
+    </a>
+    <div style="margin-top:.6rem;padding:.5rem .75rem;background:#f7f8fa;border:1.5px solid #e8eaed;border-radius:8px;display:inline-block;font-size:.82rem;color:var(--text-secondary);">
+      Password: <strong style="color:#111827;font-weight:700;letter-spacing:.03em;">Qk#9mX$v2pL</strong>
+    </div>
+    <p class="hero-note">Password-protected. Request access via the contact link below.</p>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="body-wrap">
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- WHAT IT DOES -->
+    <section class="section">
+      <h2 class="section-title">What it does</h2>
+
+      <div class="prose" style="margin-bottom: 24px;">
+        <p><strong>The problem:</strong> Distributed task management across tools like Google Keep, Notion, and Excel creates invisible urgency gaps. Work gets lost, prioritization is inconsistent, and reporting to managers requires manual effort that competes with execution time.</p>
+        <p><strong>The solution:</strong> Quest Keeper consolidates daily task management into a single gamified interface. An AI engine extracts action items from any input (pasted text, uploaded screenshots, email threads, or meeting transcripts) and automatically allocates them across an 8-hour work budget. Progress is visible in real time, and a one-click daily update delivers a structured status report to the direct manager.</p>
+      </div>
+
+      <ul class="feature-list">
+        <li>
+          <div class="feature-check">&#10003;</div>
+          <span><strong>AI task extraction from text and screenshots via Gemini Vision:</strong> no manual entry required</span>
+        </li>
+        <li>
+          <div class="feature-check">&#10003;</div>
+          <span><strong>Smart calendar with public holidays pre-seeded,</strong> custom-capacity days, and business-day-aware scheduling</span>
+        </li>
+        <li>
+          <div class="feature-check">&#10003;</div>
+          <span><strong>Editable task drawer with subtasks, descriptions, deadlines,</strong> and a built-in countdown timer with pause/resume</span>
+        </li>
+        <li>
+          <div class="feature-check">&#10003;</div>
+          <span><strong>Gamification layer:</strong> streaks, daily completion targets, end-of-day accountability, and unlockable features tied to performance</span>
+        </li>
+        <li>
+          <div class="feature-check">&#10003;</div>
+          <span><strong>One-click daily manager update:</strong> generates and delivers a structured status report automatically</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- HOW IT HELPS -->
+    <section class="section">
+      <h2 class="section-title">How it helps the team</h2>
+
+      <div class="ba-grid">
+        <div class="ba-card before">
+          <div class="ba-label">Before</div>
+          <p>Task management was fragmented across multiple tools with no unified view of urgency or daily capacity. An estimated 2 to 4 hours per day were lost to replanning and context-switching, with additional time spent composing manual status updates for the manager.</p>
+        </div>
+        <div class="ba-card after">
+          <div class="ba-label">After</div>
+          <p>Data collection in progress. This section will be updated once the solution is fully deployed.</p>
+        </div>
+      </div>
+
+      <ul class="impact-list">
+        <li>
+          <span class="impact-dot"></span>
+          <span>Saves approximately 2 to 4 hours per week per user by eliminating replanning, context-switching, and manual reporting (estimated)</span>
+        </li>
+        <li>
+          <span class="impact-dot"></span>
+          <span>Improves prioritization consistency through a structured 4-tier hierarchy with visible daily capacity</span>
+        </li>
+        <li>
+          <span class="impact-dot"></span>
+          <span>Reduces reporting overhead through automated one-click daily status updates to the direct manager</span>
+        </li>
+        <li>
+          <span class="impact-dot"></span>
+          <span>Designed to scale: the codebase can be cloned per user, with a multi-tenant version on the roadmap for broader People Team rollout</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- TECH STACK -->
+    <section class="section">
+      <h2 class="section-title">Tech Stack</h2>
+      <div class="tech-chips">
+        <span class="chip">Lovable</span>
+        <span class="chip">React</span>
+        <span class="chip">TanStack Start</span>
+        <span class="chip">TypeScript</span>
+        <span class="chip">Tailwind CSS</span>
+        <span class="chip">shadcn/ui</span>
+        <span class="chip">Gemini Flash Vision API</span>
+        <span class="chip">Lovable Cloud</span>
+      </div>
+      <div class="tech-note">Built frontend-first with no traditional backend. Lovable Cloud handles AI vision processing via edge functions, keeping infrastructure costs near zero at current usage scale.</div>
+    </section>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Status -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Status</div>
+      <div class="sidebar-status-pill">
+        <span class="status-dot"></span>
+        In Development
+      </div>
+      <p style="font-size:.82rem; color:var(--text-muted); margin-top:6px;">Since May 2026</p>
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Key Metrics</div>
+      <div class="kpi-grid">
+        <div class="kpi-cell">
+          <div class="kpi-cell-value">~2–4 hrs</div>
+          <div class="kpi-cell-label">saved / week / user</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-cell-value">TBD</div>
+          <div class="kpi-cell-label">Est. saved value / yr</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-cell-value">TBD</div>
+          <div class="kpi-cell-label">Est. cost / yr</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-cell-value">~$312</div>
+          <div class="kpi-cell-label">Comparable enterprise alternatives (avg) / yr / user</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cost Breakdown -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Cost Breakdown</div>
+      <table class="cost-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Monthly</th>
+            <th>Annual</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Lovable Pro subscription</td><td>$25</td><td>$300</td></tr>
+          <tr><td>AI vision (Gemini Flash)</td><td>~$0.10</td><td>~$1.20</td></tr>
+          <tr><td>Hosting (Lovable Cloud)</td><td>$0</td><td>$0</td></tr>
+          <tr><td>Maintenance (dev time)</td><td>~1 hr</td><td>~12 hrs</td></tr>
+          <tr><td>Domain (optional)</td><td>~$1.25</td><td>~$15</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>~$26 / mo</td><td>~$316 / yr</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Enterprise Comparison -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Enterprise Comparison</div>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>What It Does</th>
+            <th>Est. Annual Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Motion</strong><br><span style="color:var(--text-muted); font-size:.72rem;">Motion</span></td>
+            <td>AI scheduler that auto-allocates tasks across calendar time</td>
+            <td>$240 / user / yr</td>
+          </tr>
+          <tr>
+            <td><strong>Sunsama</strong><br><span style="color:var(--text-muted); font-size:.72rem;">Sunsama</span></td>
+            <td>Guided daily planner with AI-assisted prioritization</td>
+            <td>$240 / user / yr</td>
+          </tr>
+          <tr>
+            <td><strong>Centrical</strong><br><span style="color:var(--text-muted); font-size:.72rem;">Centrical</span></td>
+            <td>Enterprise performance engagement platform with gamification layer</td>
+            <td>$180 to $456 / user / yr</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="savings-note">
+        <strong>Average enterprise cost:</strong> ~$312 / user / year<br>
+        <strong>Our annual run cost:</strong> ~$316 / year (entire workspace, not per-user)<br>
+        <strong>Estimated savings (10-person team):</strong> ~$2,800 / year vs. enterprise per-seat licensing
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Links</div>
+      <div class="link-list">
+        <a href="https://task-forge-saga.lovable.app/" target="_blank" class="link-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open Quest Keeper
+        </a>
+        <div style="margin-top:.6rem;padding:.5rem .75rem;background:#f7f8fa;border:1.5px solid #e8eaed;border-radius:8px;display:inline-block;font-size:.82rem;color:var(--text-secondary);">
+          Password: <strong style="color:#111827;font-weight:700;letter-spacing:.03em;">Qk#9mX$v2pL</strong>
+        </div>
+        <a href="mailto:sprieto@degreed.com" class="link-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact for access
+        </a>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Degreed TA</p>
+</footer>
+
+</body>
+</html>

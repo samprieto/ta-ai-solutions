@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Language Fluency – TA AI Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-subtle: #f7f8fa;
+      --border: #e8eaed;
+      --border-hover: #c2c7cf;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --text-muted: #9ca3af;
+      --radius: 14px;
+      --shadow-md: 0 4px 16px rgba(0,0,0,.08);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.10);
+      --accent: #059669;
+      --accent-hover: #047857;
+      --accent-3: #34d399;
+      --accent-light: #ecfdf5;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-primary);
+      background: var(--bg);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .nav-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #0e7490 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+
+    .nav-brand-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .nav-back {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+
+    .nav-back:hover {
+      background: var(--accent-light);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+      padding: 52px 32px 48px;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .breadcrumb a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover { color: var(--accent); }
+
+    .breadcrumb-sep { color: var(--border-hover); }
+
+    .category-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .status-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 5px 13px;
+      border-radius: 100px;
+    }
+
+    .status-live::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      display: inline-block;
+    }
+
+    .meta-date {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 14.5px;
+      font-weight: 600;
+      padding: 11px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    /* ── BODY LAYOUT ── */
+    .page-body {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main-content {
+      min-width: 0;
+    }
+
+    .section {
+      margin-bottom: 52px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 15px;
+      line-height: 1.72;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    .section p strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Feature checklist */
+    .feature-list {
+      list-style: none;
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .check-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    /* Before / After */
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .ba-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .ba-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .ba-card.before .ba-label { color: #dc2626; }
+    .ba-card.after .ba-label { color: #16a34a; }
+
+    .ba-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* Impact bullets */
+    .impact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .impact-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .impact-list li::before {
+      content: '→';
+      color: var(--accent);
+      font-weight: 600;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Demo section */
+    .demo-btn-row {
+      margin-bottom: 14px;
+    }
+
+    .demo-note {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .screenshot-placeholder {
+      background: var(--bg-subtle);
+      border: 2px dashed var(--border-hover);
+      border-radius: var(--radius);
+      height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--text-muted);
+      font-size: 13.5px;
+    }
+
+    .screenshot-placeholder .ph-icon {
+      font-size: 32px;
+      opacity: 0.4;
+    }
+
+    /* Tech stack chips */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .chip {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    .tech-note {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      padding: 14px 16px;
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent-3);
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position: sticky;
+      top: 76px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-header {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 14px 18px 0;
+      margin-bottom: 4px;
+    }
+
+    /* Metrics */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      margin: 12px 0 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .metric-cell {
+      background: var(--bg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .metric-value {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+
+    .metric-label {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .status-row {
+      padding: 14px 18px;
+    }
+
+    /* Tables */
+    .cost-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    .cost-table th {
+      background: var(--bg-subtle);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cost-table td {
+      padding: 9px 12px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .cost-table tr:nth-child(even) td {
+      background: var(--bg-subtle);
+    }
+
+    .cost-table tr.total-row td {
+      background: var(--accent-light);
+      color: var(--text-primary);
+      font-weight: 700;
+      border-bottom: none;
+    }
+
+    .cost-table .amt {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Enterprise table */
+    .ent-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .ent-table th {
+      background: var(--bg-subtle);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 7px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ent-table td {
+      padding: 8px 10px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    .ent-table td:last-child {
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    .ent-summary {
+      margin: 0;
+      padding: 12px;
+      background: var(--accent-light);
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+    }
+
+    .ent-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 3px 0;
+    }
+
+    .ent-summary-row .label { color: var(--text-secondary); }
+
+    .ent-summary-row .val {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .ent-summary-row.savings .val {
+      color: #16a34a;
+    }
+
+    /* Links card */
+    .links-list {
+      padding: 4px 0 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 18px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.12s;
+    }
+
+    .link-item:last-child { border-bottom: none; }
+
+    .link-item:hover {
+      background: var(--accent-light);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-subtle);
+      padding: 0 32px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .footer-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #0e7490 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .footer-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .footer-copy {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .page-body {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        order: -1;
+      }
+
+      .before-after {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 16px; }
+      .hero { padding: 36px 16px 32px; }
+      .page-body { padding: 32px 16px 60px; }
+      footer { padding: 0 16px; }
+      .metric-grid { grid-template-columns: 1fr; }
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: .5rem;
+    }
+    .kpi-cell {
+      background: var(--bg);
+      padding: .85rem .8rem;
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+    }
+    .kpi-cell-value {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -.02em;
+      line-height: 1.2;
+    }
+    .kpi-cell-label {
+      font-size: .7rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">TA</div>
+      <span class="nav-brand-text">TA AI Lab</span>
+    </a>
+    <a href="index.html" class="nav-back">← Back to AI Solutions</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html">TA AI Lab</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Skill Assessment</span>
+      </div>
+      <div class="category-tag">Skill Assessment</div>
+      <h1 class="hero-title">Language Fluency</h1>
+      <p class="hero-desc">A browser-based fluency assessment: candidates record a response to a standardized prompt with zero third-party storage and full LGPD compliance.</p>
+      <div class="hero-meta">
+        <span class="status-live">Live</span>
+        <span class="meta-date">May 2026</span>
+      </div>
+      <a href="https://degreed-ta.github.io/degreed-english-assessment/" target="_blank" class="btn-primary">Open Language Fluency →</a>
+    </div>
+  </section>
+
+  <!-- BODY -->
+  <div class="page-body">
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- WHAT IT DOES -->
+      <div class="section">
+        <h2 class="section-title">What it does</h2>
+        <p><strong>The problem:</strong> Confirming a candidate's English fluency used to require coordinating availability, scheduling, and running a screening call, only to discover, sometimes 20 or more minutes in, that the level wasn't where the role needed it to be. That cycle burned recruiter time on every applicant regardless of whether they could realistically move forward.</p>
+        <p><strong>The solution:</strong> Language Fluency is a single-page web app hosted free on GitHub Pages. The candidate receives a link in their Greenhouse outreach email, opens it, reads a standardized prompt in the language being assessed, and records a response of up to 5 minutes directly in the browser. The audio is generated locally, previewed by the candidate, downloaded to their device, and re-uploaded to their Greenhouse application, where the recruiter and hiring manager can listen asynchronously before deciding whether to invest interview time.</p>
+        <ul class="feature-list">
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Branded interface in Degreed colors with a fixed prompt and a 5-minute soft cap on response length</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Records audio entirely in the candidate's browser memory: no server, no database, no third-party storage at any point in the flow</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Step-by-step submission guidance that updates as the candidate progresses (record, preview, download, upload to Greenhouse)</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Editable in minutes: prompts, branding, and timing can all be updated by replacing one HTML file in the repository</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Scalable to any language: updating the prompt and interface language is a one-line edit, at no additional cost</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- HOW IT HELPS -->
+      <div class="section">
+        <h2 class="section-title">How it helps the team</h2>
+        <div class="before-after">
+          <div class="ba-card before">
+            <div class="ba-label">Before</div>
+            <p>English fluency was assessed during a live screening interview, which meant the team invested in availability coordination, scheduling, and a 30+ minute call before learning whether the candidate's English met the bar, burning recruiter capacity on candidates who couldn't move forward.</p>
+          </div>
+          <div class="ba-card after">
+            <div class="ba-label">After</div>
+            <p>Candidates self-serve a 5-minute standardized assessment before any live screen. Recruiters and hiring managers review the audio asynchronously, advancing only candidates who meet the language bar to a full screening call.</p>
+          </div>
+        </div>
+        <ul class="impact-list">
+          <li>In its first deployment (Senior TA Partner role), 7 candidates were invited and 90% completed the assessment, a strong signal that the candidate experience works</li>
+          <li>Saves an estimated approximately 30 minutes of recruiter time per candidate by replacing scheduled language screens with async audio review (estimated)</li>
+          <li>Eliminates LGPD exposure entirely: candidate audio never touches a third-party server</li>
+          <li>Available to the entire TA team for any role going forward, with no per-seat or per-use cost</li>
+        </ul>
+      </div>
+
+      <!-- TECH STACK -->
+      <div class="section">
+        <h2 class="section-title">Tech Stack</h2>
+        <div class="chip-row">
+          <span class="chip">HTML5</span>
+          <span class="chip">Vanilla JavaScript</span>
+          <span class="chip">CSS</span>
+          <span class="chip">MediaRecorder API</span>
+          <span class="chip">GitHub Pages</span>
+        </div>
+        <p class="tech-note">No backend, no database, no AI APIs. The MediaRecorder API is built into every modern browser, so audio is generated and held in the candidate's local browser memory until they choose to download it. That's what makes the solution both free to run and LGPD-compliant by design.</p>
+      </div>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <!-- Status + Metrics -->
+      <div class="card">
+        <div class="card-header">Status</div>
+        <div class="status-row">
+          <span class="status-live">Live</span>
+          <p style="font-size:.8rem;color:var(--text-muted);margin-top:.6rem;">Since May 2026</p>
+        </div>
+        <div class="card-header">Key Metrics</div>
+        <div class="kpi-grid">
+          <div class="kpi-cell">
+            <div class="kpi-cell-value">~30 min</div>
+            <div class="kpi-cell-label">saved per candidate screened</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="kpi-cell-value">TBD</div>
+            <div class="kpi-cell-label">Est. saved value / yr</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="kpi-cell-value">$0</div>
+            <div class="kpi-cell-label">Est. cost / yr</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="kpi-cell-value">~$18,300</div>
+            <div class="kpi-cell-label">Comparable enterprise alternatives (avg) / yr</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cost Breakdown -->
+      <div class="card">
+        <div class="card-header" style="padding-bottom:10px;">Cost Breakdown</div>
+        <table class="cost-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Monthly</th>
+              <th>Annual</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AI API usage</td>
+              <td class="amt">$0</td>
+              <td class="amt">$0</td>
+            </tr>
+            <tr>
+              <td>Hosting / infra</td>
+              <td class="amt">$0</td>
+              <td class="amt">$0</td>
+            </tr>
+            <tr>
+              <td>Maintenance</td>
+              <td class="amt">~0.25 hr</td>
+              <td class="amt">~4 hrs</td>
+            </tr>
+            <tr>
+              <td>Other</td>
+              <td class="amt">$0</td>
+              <td class="amt">$0</td>
+            </tr>
+            <tr class="total-row">
+              <td>TOTAL</td>
+              <td class="amt">TBD</td>
+              <td class="amt">TBD</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Enterprise Comparison -->
+      <div class="card">
+        <div class="card-header" style="padding-bottom:10px;">Enterprise Comparison</div>
+        <table class="ent-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>What It Does</th>
+              <th>Est. Annual</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>HireVue</strong><br><span style="color:var(--text-muted);font-size:11px;">HireVue Inc.</span></td>
+              <td>Enterprise async video and audio interviewing with AI assessment</td>
+              <td>~$35K–50K / yr</td>
+            </tr>
+            <tr>
+              <td><strong>VidCruiter</strong><br><span style="color:var(--text-muted);font-size:11px;">VidCruiter Inc.</span></td>
+              <td>Recruitment suite with structured async video and audio interviews</td>
+              <td>~$5K–10K / yr</td>
+            </tr>
+            <tr>
+              <td><strong>Spark Hire</strong><br><span style="color:var(--text-muted);font-size:11px;">Spark Hire</span></td>
+              <td>Mid-market one-way video/audio interview platform</td>
+              <td>~$3.6K–6K / yr</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="ent-summary">
+          <div class="ent-summary-row">
+            <span class="label">Avg enterprise cost</span>
+            <span class="val">~$18,300 / yr</span>
+          </div>
+          <div class="ent-summary-row">
+            <span class="label">Our annual run cost</span>
+            <span class="val">$0 / yr</span>
+          </div>
+          <div class="ent-summary-row savings">
+            <span class="label">Estimated savings</span>
+            <span class="val">~$18,300 / yr</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div class="card">
+        <div class="card-header">Links</div>
+        <div class="links-list">
+          <a href="https://degreed-ta.github.io/degreed-english-assessment/" target="_blank" class="link-item">
+            <span>↗</span> Open Assessment
+          </a>
+          <a href="mailto:sprieto@degreed.com" class="link-item">
+            <span>✉</span> Contact builder
+          </a>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-brand">
+      <div class="footer-logo">TA</div>
+      <span class="footer-name">TA AI Lab</span>
+    </a>
+    <span class="footer-copy">© 2026 Degreed TA</span>
+  </footer>
+
+</body>
+</html>

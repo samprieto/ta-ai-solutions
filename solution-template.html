@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ✏️ UPDATE: Change to your tool's name -->
+  <title>Tool Name · TA AI Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-subtle: #f7f8fa;
+      --bg-card: #ffffff;
+      --border: #e8eaed;
+      --border-hover: #c2c7cf;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --text-muted: #9ca3af;
+      --accent: #4f46e5;
+      --accent-light: #eef2ff;
+      --accent-hover: #4338ca;
+      --accent-3: #8b5cf6;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.10);
+      --radius: 14px;
+    }
+
+    /* ✏️ UPDATE: Change accent color per tool (optional) */
+    /* Examples:
+       cyan:    --accent: #0891b2; --accent-light: #ecfeff; --accent-3: #06b6d4;
+       violet:  --accent: #7c3aed; --accent-light: #f5f3ff; --accent-3: #a78bfa;
+       emerald: --accent: #059669; --accent-light: #ecfdf5; --accent-3: #34d399;
+       rose:    --accent: #e11d48; --accent-light: #fff1f2; --accent-3: #fb7185;
+       amber:   --accent: #d97706; --accent-light: #fffbeb; --accent-3: #fbbf24;
+    */
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.85); backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 1.05rem; color: var(--text-primary); text-decoration: none;
+    }
+    .nav-logo {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 800; font-size: .8rem;
+    }
+    .nav-back {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .875rem; font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-back:hover { color: var(--text-primary); }
+
+    /* ── HERO ── */
+    .tool-hero {
+      background: var(--bg-subtle); border-bottom: 1px solid var(--border);
+      padding: 64px 2rem 56px;
+    }
+    .tool-hero-inner { max-width: 1100px; margin: 0 auto; }
+    .breadcrumb {
+      font-size: .8rem; color: var(--text-muted); margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--accent); }
+
+    .tool-hero-tag {
+      display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; background: var(--accent-light); color: var(--accent);
+      padding: .3rem .8rem; border-radius: 100px; border: 1px solid #d0d7ff; margin-bottom: 1.2rem;
+    }
+    .tool-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -.03em;
+      line-height: 1.15; margin-bottom: 1rem; max-width: 700px;
+    }
+    .tool-hero-desc {
+      font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .tool-hero-meta {
+      display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;
+    }
+    .meta-badge {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .82rem; font-weight: 500; color: var(--text-secondary);
+    }
+    .meta-badge .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .dot-live { background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.18); }
+    .dot-beta { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,.18); }
+    .dot-dev  { background: #6b7280; }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--accent); color: #fff;
+      padding: .7rem 1.5rem; border-radius: 9px; font-weight: 600; font-size: .9rem;
+      text-decoration: none; transition: background .2s, transform .15s;
+      box-shadow: 0 2px 12px rgba(79,70,229,.25);
+    }
+    .hero-cta:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
+    /* ── LAYOUT ── */
+    .page-body { max-width: 1100px; margin: 0 auto; padding: 56px 2rem 80px; }
+    .page-grid { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
+
+    /* ── SECTIONS ── */
+    .content-section { margin-bottom: 3.5rem; }
+    .section-eyebrow {
+      font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .5rem;
+    }
+    .content-section h2 {
+      font-size: 1.45rem; font-weight: 800; letter-spacing: -.02em;
+      color: var(--text-primary); margin-bottom: 1rem;
+    }
+    .content-section p {
+      font-size: .95rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: .9rem;
+    }
+    .content-section p:last-child { margin-bottom: 0; }
+
+    /* feature list */
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; margin-top: 1.2rem; }
+    .feature-list li {
+      display: flex; gap: .9rem; align-items: flex-start;
+      font-size: .9rem; color: var(--text-secondary); line-height: 1.6;
+    }
+    .feature-list li .check {
+      width: 20px; height: 20px; border-radius: 6px; background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; flex-shrink: 0; margin-top: 1px; color: var(--accent);
+    }
+
+    /* screenshot placeholder */
+    .screenshot-box {
+      background: var(--bg-subtle); border: 1.5px dashed var(--border-hover);
+      border-radius: var(--radius); min-height: 240px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: .6rem; padding: 2rem; text-align: center; margin-top: 1.2rem;
+    }
+    .screenshot-box .ss-icon { font-size: 2rem; opacity: .4; }
+    .screenshot-box p { font-size: .82rem; color: var(--text-muted); max-width: 260px; line-height: 1.6; }
+    /* real screenshot */
+    .screenshot-box img { width: 100%; border-radius: 9px; display: block; }
+
+    /* ── COST TABLE ── */
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 1.2rem; font-size: .9rem; }
+    .cost-table th {
+      text-align: left; font-size: .75rem; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--text-muted);
+      padding: .6rem 1rem; background: var(--bg-subtle);
+      border-top: 1.5px solid var(--border); border-bottom: 1.5px solid var(--border);
+    }
+    .cost-table td { padding: .85rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .cost-table tr:last-child td { border-bottom: none; }
+    .cost-table td:first-child { font-weight: 600; color: var(--text-primary); }
+    .cost-table td:last-child { color: var(--text-secondary); }
+    .cost-table .total-row td { background: var(--accent-light); font-weight: 700; color: var(--accent); border-radius: 0; }
+    .cost-table .saving { color: #059669 !important; font-weight: 700 !important; }
+
+    /* ── TECH STACK ── */
+    .tech-chips { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+    .tech-chip {
+      font-size: .78rem; font-weight: 600; padding: .3rem .8rem;
+      border-radius: 100px; background: var(--bg-subtle); color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+    .sidebar-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 1.4rem;
+    }
+    .sidebar-card h3 {
+      font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 1rem;
+    }
+
+    .kpi-list { display: flex; flex-direction: column; gap: .9rem; }
+    .kpi-item { display: flex; flex-direction: column; gap: .15rem; }
+    .kpi-value { font-size: 1.5rem; font-weight: 800; letter-spacing: -.03em; color: var(--text-primary); }
+    .kpi-label { font-size: .78rem; color: var(--text-muted); font-weight: 500; }
+    .kpi-divider { border: none; border-top: 1px solid var(--border); margin: .2rem 0; }
+
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: .82rem; font-weight: 600;
+      padding: .4rem .9rem; border-radius: 100px;
+      background: #dcfce7; color: #15803d;
+    }
+    .status-pill.beta { background: #fef9c3; color: #a16207; }
+    .status-pill.dev  { background: var(--bg-subtle); color: var(--text-secondary); }
+
+    .sidebar-link-list { display: flex; flex-direction: column; gap: .5rem; }
+    .sidebar-link {
+      display: flex; align-items: center; gap: 7px;
+      font-size: .875rem; font-weight: 500; color: var(--accent);
+      text-decoration: none; transition: gap .2s;
+    }
+    .sidebar-link:hover { gap: 10px; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 2rem; }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-brand {
+      display: flex; align-items: center; gap: 9px;
+      font-weight: 700; font-size: .95rem; color: var(--text-primary); text-decoration: none;
+    }
+    .footer-logo {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 800; font-size: .72rem;
+    }
+    .footer-copy { font-size: .82rem; color: var(--text-muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .page-grid { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+    @media (max-width: 640px) {
+      .tool-hero { padding: 48px 1.5rem 40px; }
+      .page-body { padding: 40px 1.5rem 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <div class="nav-logo">TA</div>
+      TA AI Labs
+    </a>
+    <a class="nav-back" href="index.html">← Back to all tools</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="tool-hero">
+  <div class="tool-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">TA AI Labs</a>
+      <span>·</span>
+      <!-- ✏️ UPDATE: Change to your tool's category -->
+      <span>Automation</span>
+    </div>
+
+    <!-- ✏️ UPDATE: Change tag to match tool category -->
+    <div class="tool-hero-tag">Automation</div>
+
+    <!-- ✏️ UPDATE: Change to your tool's name and subtitle -->
+    <h1>Tool Name</h1>
+    <p class="tool-hero-desc">
+      A clear, compelling one-to-two sentence description of what this tool does and the specific problem it solves for the TA team. Keep it plain and jargon-free.
+    </p>
+
+    <div class="tool-hero-meta">
+      <!-- ✏️ UPDATE: Change status — options: dot-live (green), dot-beta (yellow), dot-dev (gray) -->
+      <div class="meta-badge">
+        <div class="dot dot-live"></div>
+        Live since January 2025
+      </div>
+      <!-- ✏️ UPDATE: Change or remove the demo link -->
+      <a class="hero-cta" href="#demo">Try It Live →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── PAGE BODY ── -->
+<div class="page-body">
+  <div class="page-grid">
+
+    <!-- ── MAIN CONTENT ── -->
+    <div class="main-col">
+
+      <!-- SECTION 1: What It Does -->
+      <div class="content-section" id="what-it-does">
+        <div class="section-eyebrow">What it does</div>
+        <h2>The Problem & The Solution</h2>
+        <p>
+          <!-- ✏️ UPDATE: Describe the problem this tool was built to solve -->
+          Before this tool, the team was spending X hours per week on [manual task]. It was repetitive, error-prone, and pulled people away from higher-value work.
+        </p>
+        <p>
+          <!-- ✏️ UPDATE: Describe how the tool works at a high level -->
+          This tool uses AI to [describe mechanism — e.g., "automatically draft job descriptions based on a simple role brief", "parse incoming resumes and tag them by skill"]. It integrates directly with [existing tool/system] so there's no extra login or context switch.
+        </p>
+        <ul class="feature-list">
+          <!-- ✏️ UPDATE: Replace with real features / capabilities -->
+          <li><span class="check">✓</span>Feature or capability #1 — brief explanation of what it does</li>
+          <li><span class="check">✓</span>Feature or capability #2 — brief explanation of what it does</li>
+          <li><span class="check">✓</span>Feature or capability #3 — brief explanation of what it does</li>
+          <li><span class="check">✓</span>Feature or capability #4 — brief explanation of what it does</li>
+        </ul>
+      </div>
+
+      <!-- SECTION 2: How It Helps the Team -->
+      <div class="content-section" id="team-impact">
+        <div class="section-eyebrow">Team Impact</div>
+        <h2>How it helps the team</h2>
+        <p>
+          <!-- ✏️ UPDATE: Describe concrete before/after for the team -->
+          Before this tool, a recruiter would spend roughly [X time] doing [task] manually. Now, that same output takes [Y time] with a quick review pass. That's [Z hours] freed up each week per person on the team.
+        </p>
+        <p>
+          <!-- ✏️ UPDATE: Add qualitative impact -->
+          Beyond the time savings, the quality has also improved. [Describe quality improvement — e.g., "Job descriptions are more consistent in tone and length", "Candidate responses are faster and more personalized"].
+        </p>
+        <ul class="feature-list">
+          <!-- ✏️ UPDATE: Replace with real team benefits -->
+          <li><span class="check">✓</span>Saves approximately X hours per week across the team</li>
+          <li><span class="check">✓</span>Reduces errors / inconsistencies in [output type]</li>
+          <li><span class="check">✓</span>Frees up time for higher-value candidate-facing work</li>
+        </ul>
+      </div>
+
+      <!-- SECTION 3: Demo / Screenshots -->
+      <div class="content-section" id="demo">
+        <div class="section-eyebrow">Live Demo & Screenshots</div>
+        <h2>See it in action</h2>
+        <p>
+          <!-- ✏️ UPDATE: Add a description of the demo / what's shown -->
+          Below you can try the tool directly or see screenshots of the key screens.
+        </p>
+
+        <!-- ✏️ OPTION A: Link to external tool -->
+        <a class="hero-cta" href="#" style="display:inline-flex;margin-bottom:1.5rem;" target="_blank">
+          Open Tool →
+        </a>
+
+        <!-- ✏️ OPTION B: Embed iframe (remove if not applicable) -->
+        <!-- <iframe src="https://your-tool-url.com" width="100%" height="500" style="border:none;border-radius:12px;border:1.5px solid var(--border);" title="Tool Demo"></iframe> -->
+
+        <!-- ✏️ OPTION C: Screenshot(s) — replace placeholder with real images -->
+        <div class="screenshot-box">
+          <!-- When you have a real screenshot, replace the placeholder content with: -->
+          <!-- <img src="screenshots/tool-name-screenshot-1.png" alt="Screenshot of tool showing [what]" /> -->
+          <div class="ss-icon">🖼</div>
+          <p>Screenshot coming soon — swap this placeholder with a real screenshot image when ready.</p>
+        </div>
+
+      </div>
+
+      <!-- SECTION 4: Tech Stack -->
+      <div class="content-section" id="tech-stack">
+        <div class="section-eyebrow">Under the Hood</div>
+        <h2>How it was built</h2>
+        <p>
+          <!-- ✏️ UPDATE: Describe the tech choices and why -->
+          This tool was built using [describe stack]. We chose [technology] because [brief reason — performance, cost, existing infrastructure, etc.].
+        </p>
+        <p>
+          <!-- ✏️ UPDATE: Describe architecture if useful -->
+          The architecture is straightforward: [brief flow description — e.g., "a lightweight Node.js API calls the OpenAI API, formats the response, and pushes it into our ATS via webhook"].
+        </p>
+        <div class="tech-chips">
+          <!-- ✏️ UPDATE: Replace with real tech stack tags -->
+          <span class="tech-chip">Claude API</span>
+          <span class="tech-chip">Node.js</span>
+          <span class="tech-chip">React</span>
+          <span class="tech-chip">Webhook</span>
+          <span class="tech-chip">Greenhouse (ATS)</span>
+          <span class="tech-chip">GitHub Actions</span>
+        </div>
+      </div>
+
+    </div><!-- /main-col -->
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+
+      <!-- STATUS -->
+      <div class="sidebar-card">
+        <h3>Status</h3>
+        <!-- ✏️ UPDATE: Change class to "beta" or "dev" as needed -->
+        <div class="status-pill">● Live &amp; Running</div>
+      </div>
+
+      <!-- KEY METRICS -->
+      <div class="sidebar-card">
+        <h3>Key Metrics</h3>
+        <div class="kpi-list">
+          <!-- ✏️ UPDATE: Replace with real KPIs -->
+          <div class="kpi-item">
+            <div class="kpi-value">~X hrs</div>
+            <div class="kpi-label">Saved per week</div>
+          </div>
+          <hr class="kpi-divider" />
+          <div class="kpi-item">
+            <div class="kpi-value">$X/mo</div>
+            <div class="kpi-label">Monthly run cost</div>
+          </div>
+          <hr class="kpi-divider" />
+          <div class="kpi-item">
+            <div class="kpi-value">$X/mo</div>
+            <div class="kpi-label">Equivalent vendor cost</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COST BREAKDOWN -->
+      <div class="sidebar-card">
+        <h3>Cost & Savings</h3>
+        <table class="cost-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- ✏️ UPDATE: Fill in real cost line items -->
+            <tr>
+              <td>AI API usage</td>
+              <td>$X / mo</td>
+            </tr>
+            <tr>
+              <td>Hosting / infra</td>
+              <td>$X / mo</td>
+            </tr>
+            <tr>
+              <td>Maintenance time</td>
+              <td>~X hr / mo</td>
+            </tr>
+            <tr class="total-row">
+              <td>Total run cost</td>
+              <td>~$X / mo</td>
+            </tr>
+            <tr>
+              <td>Comparable vendor</td>
+              <td>$X–Y / mo</td>
+            </tr>
+            <tr>
+              <td class="saving">Estimated savings</td>
+              <td class="saving">$X / mo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- LINKS -->
+      <div class="sidebar-card">
+        <h3>Links</h3>
+        <div class="sidebar-link-list">
+          <!-- ✏️ UPDATE: Replace with real links -->
+          <a class="sidebar-link" href="#" target="_blank">🔗 Open the tool →</a>
+          <a class="sidebar-link" href="#" target="_blank">📄 Documentation →</a>
+          <a class="sidebar-link" href="mailto:sprieto@degreed.com">✉️ Contact the builder →</a>
+        </div>
+      </div>
+
+    </aside>
+  </div><!-- /page-grid -->
+</div><!-- /page-body -->
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <a class="footer-brand" href="index.html">
+      <div class="footer-logo">TA</div>
+      TA AI Labs
+    </a>
+    <span class="footer-copy">© 2026 · Built with purpose inside Degreed's TA team</span>
+  </div>
+</footer>
+
+</body>
+</html>

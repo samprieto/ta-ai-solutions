@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TA AI Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-subtle: #f7f8fa;
+      --bg-card: #ffffff;
+      --border: #e8eaed;
+      --border-hover: #c2c7cf;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --text-muted: #9ca3af;
+      --accent: #0d9488;
+      --accent-light: #f0fdfa;
+      --accent-hover: #0f766e;
+      --accent-3: #2dd4bf;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.06);
+      --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 1.05rem; color: var(--text-primary);
+      text-decoration: none;
+    }
+    .nav-logo {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 800; font-size: .82rem; letter-spacing: -.5px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 1.8rem; }
+    .nav-links a {
+      font-size: .9rem; font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-cta {
+      background: var(--accent); color: #fff !important;
+      padding: .45rem 1.1rem; border-radius: 8px;
+      font-size: .875rem !important; transition: background .2s, transform .15s !important;
+    }
+    .nav-cta:hover { background: var(--accent-hover) !important; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px; margin: 0 auto;
+      padding: 90px 2rem 80px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800;
+      line-height: 1.12; letter-spacing: -.03em;
+      color: var(--text-primary); max-width: 800px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-actions { display: flex; gap: 1rem; margin-top: 2.4rem; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      padding: .75rem 1.8rem; border-radius: 10px; font-weight: 600; font-size: .95rem;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 2px 12px rgba(13,148,136,.25);
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(13,148,136,.3); }
+
+    .hero-stats {
+      display: flex; align-items: center; gap: 2rem;
+      margin-top: 3.5rem; flex-wrap: wrap; justify-content: center;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 1.6rem; font-weight: 800; color: var(--text-primary); letter-spacing: -.03em; }
+    .stat-label { font-size: .8rem; color: var(--text-muted); font-weight: 500; margin-top: .1rem; }
+    .stat-sep { width: 1px; height: 36px; background: var(--border); flex-shrink: 0; }
+
+    /* ── DIVIDER ── */
+    .divider { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .divider hr { border: none; border-top: 1px solid var(--border); }
+
+    /* ── VALUE STRIP ── */
+    .value-strip { background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .value-strip-inner {
+      max-width: 1100px; margin: 0 auto; padding: 52px 2rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem;
+    }
+    .value-item { display: flex; flex-direction: column; gap: .5rem; }
+    .value-icon { font-size: 1.5rem; margin-bottom: .3rem; }
+    .value-title { font-size: .95rem; font-weight: 700; color: var(--text-primary); }
+    .value-desc { font-size: .85rem; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ── SECTION ── */
+    .section { padding: 64px 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .75rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2rem); font-weight: 800; letter-spacing: -.025em;
+      color: var(--text-primary); margin-bottom: .6rem;
+    }
+    .section-sub { font-size: .95rem; color: var(--text-secondary); max-width: 520px; line-height: 1.7; }
+
+    /* ── SOLUTIONS GRID ── */
+    .solutions-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem; }
+    .solutions-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1.5rem;
+    }
+
+    .solution-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: .9rem;
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+      position: relative; overflow: hidden;
+    }
+    .solution-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(13,148,136,.04), transparent);
+      opacity: 0; transition: opacity .3s;
+    }
+    .solution-card:hover { border-color: var(--accent); box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .solution-card:hover::before { opacity: 1; }
+
+    .solution-card-top { display: flex; align-items: flex-start; justify-content: space-between; }
+    .solution-icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .solution-tag {
+      font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+      padding: .25rem .65rem; border-radius: 100px;
+    }
+
+    .solution-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); }
+    .solution-card p { font-size: .875rem; color: var(--text-secondary); line-height: 1.6; flex: 1; }
+    .solution-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: .75rem; border-top: 1px solid var(--border); margin-top: auto;
+    }
+    .solution-card-footer span { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
+    .solution-card-arrow {
+      width: 28px; height: 28px; border-radius: 7px; background: var(--bg-subtle);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; transition: background .2s, transform .2s;
+    }
+    .solution-card:hover .solution-card-arrow { background: var(--accent-light); transform: translateX(3px); }
+
+    /* card color themes */
+    .theme-teal .solution-icon { background: #f0fdfa; }
+    .theme-teal .solution-tag { background: #f0fdfa; color: #0d9488; }
+    .theme-cyan .solution-icon { background: #ecfeff; }
+    .theme-cyan .solution-tag { background: #ecfeff; color: #0891b2; }
+    .theme-emerald .solution-icon { background: #ecfdf5; }
+    .theme-emerald .solution-tag { background: #ecfdf5; color: #059669; }
+    .theme-rose .solution-icon { background: #fff1f2; }
+    .theme-rose .solution-tag { background: #fff1f2; color: #e11d48; }
+    .theme-amber .solution-icon { background: #fffbeb; }
+    .theme-amber .solution-tag { background: #fffbeb; color: #d97706; }
+    .theme-sky .solution-icon { background: #f0f9ff; }
+    .theme-sky .solution-tag { background: #f0f9ff; color: #0284c7; }
+
+    /* status dots */
+    .status-dot {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .8rem; color: var(--text-muted); font-weight: 500;
+    }
+    .status-dot::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+    }
+    .status-live::before { background: #22c55e; box-shadow: 0 0 0 2px rgba(34,197,94,.2); }
+    .status-beta::before { background: #f59e0b; }
+    .status-dev::before { background: #9ca3af; }
+
+    /* ── CONTACT SECTION ── */
+    .contact-section {
+      border-top: 1px solid var(--border);
+      padding: 60px 2rem;
+      text-align: center;
+    }
+    .contact-inner { max-width: 480px; margin: 0 auto; }
+    .contact-inner h2 {
+      font-size: 1.4rem; font-weight: 800; letter-spacing: -.025em;
+      color: var(--text-primary); margin-bottom: .6rem;
+    }
+    .contact-inner p {
+      font-size: .95rem; color: var(--text-secondary); margin-bottom: 1.75rem; line-height: 1.7;
+    }
+    .btn-github {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: #24292f; color: #fff;
+      padding: .75rem 1.6rem; border-radius: 10px; font-weight: 600; font-size: .9rem;
+      text-decoration: none; transition: background .2s, transform .15s;
+      box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    }
+    .btn-github:hover { background: #1a1f24; transform: translateY(-2px); }
+    .btn-github svg { flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 1.75rem 2rem; }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-brand {
+      display: flex; align-items: center; gap: 9px;
+      font-weight: 700; font-size: .95rem; color: var(--text-primary); text-decoration: none;
+    }
+    .footer-logo {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 800; font-size: .72rem;
+    }
+    .footer-copy { font-size: .82rem; color: var(--text-muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero { padding: 60px 1.5rem 60px; }
+      .solutions-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+      .stat-sep { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <div class="nav-logo">TA</div>
+      TA AI Lab
+    </a>
+    <div class="nav-links">
+      <a href="#solutions">AI Solutions</a>
+      <!-- hidden for now: Get in Touch button -->
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <h1>AI solutions for Talent Acquisition</h1>
+  <div class="hero-actions">
+    <a href="#solutions" class="btn-primary">Explore Solutions</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Solutions Deployed</div>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">In Development</div>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <!-- ✏️ UPDATE: Estimated annual cost savings vs. enterprise alternatives -->
+      <div class="stat-num">~$34K</div>
+      <div class="stat-label">Est. Annual Cost Savings</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr /></div>
+
+<!-- ── VALUE STRIP ── -->
+<div class="value-strip">
+  <div class="value-strip-inner">
+    <div class="value-item">
+      <div class="value-icon">⚡</div>
+      <div class="value-title">Built In-House</div>
+      <div class="value-desc">No vendor lock-in. Every solution is owned, maintained, and evolved by our team.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">🎯</div>
+      <div class="value-title">Purpose-Built</div>
+      <div class="value-desc">Designed around real TA workflows, not generic AI features retrofitted to our needs.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">💰</div>
+      <div class="value-title">Cost-Conscious</div>
+      <div class="value-desc">Each solution tracks its own cost and the value it replaces, so ROI is always visible.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">🔒</div>
+      <div class="value-title">Secure by Design</div>
+      <div class="value-desc">Built within our existing security and compliance perimeter from day one.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SOLUTIONS GRID ── -->
+<section class="section" id="solutions">
+  <div class="solutions-header">
+    <div>
+      <h2 class="section-title">AI Solutions</h2>
+      <p class="section-sub">Click any solution to see what it does, how it helps the team, costs (if any), and what we save by building it ourselves.</p>
+    </div>
+  </div>
+
+  <div class="solutions-grid">
+
+    <!-- QuickSlot -->
+    <a class="solution-card theme-cyan" href="solution-quickslot.html">
+      <div class="solution-card-top">
+        <div class="solution-icon">📅</div>
+        <span class="solution-tag">Workflow</span>
+      </div>
+      <h3>QuickSlot</h3>
+      <p>Generate live candidate availability links without calendar permissions, manual coordination, or scheduling back-and-forth.</p>
+      <div class="solution-card-footer">
+        <span class="status-dot status-live">Live · April 2026</span>
+        <div class="solution-card-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- Language Fluency -->
+    <a class="solution-card theme-emerald" href="solution-language-fluency.html">
+      <div class="solution-card-top">
+        <div class="solution-icon">🎙️</div>
+        <span class="solution-tag">Skill Assessment</span>
+      </div>
+      <h3>Language Fluency</h3>
+      <p>A browser-based fluency assessment: candidates record a response to a standardized prompt with zero third-party storage and full LGPD compliance.</p>
+      <div class="solution-card-footer">
+        <span class="status-dot status-live">Live · May 2026</span>
+        <div class="solution-card-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- Quest Keeper -->
+    <a class="solution-card theme-amber" href="solution-quest-keeper.html">
+      <div class="solution-card-top">
+        <div class="solution-icon">⚔️</div>
+        <span class="solution-tag">Work Management</span>
+      </div>
+      <h3>Quest Keeper</h3>
+      <p>An AI-powered work management system that transforms daily priorities into structured, time-allocated tasks, automatically captured from screenshots, emails, and meetings.</p>
+      <div class="solution-card-footer">
+        <span class="status-dot status-beta">Early Access · May 2026</span>
+        <div class="solution-card-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- Scout -->
+    <a class="solution-card theme-teal" href="solution-scout.html">
+      <div class="solution-card-top">
+        <div class="solution-icon">🔍</div>
+        <span class="solution-tag">Sourcing</span>
+      </div>
+      <h3>Scout</h3>
+      <p>Autonomously searches public web data to find and rank the best-fit candidates for any role. No manual searching required.</p>
+      <div class="solution-card-footer">
+        <span class="status-dot status-dev">In Development · Expected June 2026</span>
+        <div class="solution-card-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- Skill Scanner -->
+    <a class="solution-card theme-sky" href="solution-skill-scanner.html">
+      <div class="solution-card-top">
+        <div class="solution-icon">🎧</div>
+        <span class="solution-tag">Skill Assessment</span>
+      </div>
+      <h3>Skill Scanner</h3>
+      <p>A voice-based AI interviewer that assesses candidates on up to five role-specific skills and delivers a scored evaluation report, automatically, in 30 minutes.</p>
+      <div class="solution-card-footer">
+        <span class="status-dot status-dev">In Development · Expected June 2026</span>
+        <div class="solution-card-arrow">→</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ── CONTACT (hidden for now) ── -->
+<div class="contact-section" style="display:none">
+  <div class="contact-inner">
+    <h2>Have an idea or a question?</h2>
+    <p>Open an issue on GitHub. No account setup needed, just a quick message.</p>
+    <!-- ✏️ UPDATE: Replace the href with your actual GitHub repo issues URL once the repo is created -->
+    <a class="btn-github"
+       href="https://github.com/samprieto/ta-ai-solutions/issues/new?title=Getting+in+Touch&body=Hi+Sam%2C%0A%0A"
+       target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+      </svg>
+      Get in Touch on GitHub
+    </a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <a class="footer-brand" href="index.html">
+      <div class="footer-logo">TA</div>
+      TA AI Lab
+    </a>
+    <span class="footer-copy">© 2026 Degreed TA</span>
+  </div>
+</footer>
+
+</body>
+</html>
