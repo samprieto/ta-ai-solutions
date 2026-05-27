@@ -1,4 +1,4 @@
-# TA AI Labs — Solution Page Intake Prompt
+# TA AI Solutionss — Solution Page Intake Prompt
 ### Paste this into a conversation to generate everything needed for a solution page.
 ### Works two ways: in an existing build conversation, or with a fresh URL.
 
