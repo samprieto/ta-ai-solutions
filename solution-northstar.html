@@ -379,6 +379,9 @@
     .shot.missing { min-height:160px; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-size:.85rem; font-weight:500; }
     .shot.missing::after { content:"Screenshot coming soon"; }
     @media (max-width:640px){ .story{flex-direction:column;} .flow-wrap{flex-direction:column;} .flow-side{writing-mode:horizontal-tb;transform:none;} }
+    .shots { display:grid; gap:1rem; margin-top:.5rem; }
+    .shots.stack { grid-template-columns:1fr; }
+    .shots.stack .shot:nth-child(2) { max-width:360px; margin:0 auto; }
 </style>
 </head>
 <body>
@@ -407,7 +410,7 @@
     </div>
     <div class="category-tag">Business &amp; Workforce OS</div>
     <h1>NorthStar</h1>
-    <p class="hero-desc">Turn business strategy into the organization, capabilities, workforce, and investment required to win.</p>
+    <p class="hero-desc">The business intelligence layer that transforms strategy into the organization, capabilities, and talent required to win.</p>
   </div>
 </section>
 
@@ -421,23 +424,23 @@
     <section class="section">
       <h2 class="section-title">What it does</h2>
       <div class="prose" style="margin-bottom: 24px;">
-        <p><strong>The problem:</strong> Business strategy, workforce planning, organizational design, skills, budgets, and hiring are typically managed across disconnected systems, spreadsheets, presentations, and teams. Leaders define ambitious business goals but often lack a single view of whether they have the organizational capabilities, skills, structure, budget, and talent required to execute them.</p>
-        <p>This fragmentation makes fundamental questions surprisingly difficult to answer: Do we have the capabilities required to deliver our strategy? Where are our biggest workforce gaps? Is our organization structured effectively? What will our workforce plan cost? What happens if we restructure a team, move roles, invest in a new capability, or change our hiring plan?</p>
-        <p><strong>The solution:</strong> NorthStar is a Business &amp; Workforce Operating System that connects business strategy, organizational capabilities, workforce planning, financial planning, talent intelligence, and hiring execution in one integrated platform. Leaders start with where the business is going, and NorthStar helps translate those goals into the capabilities, skills, organizational structure, workforce investment, and talent strategy required to get there.</p>
+        <p><strong>The problem:</strong> The data leaders need to build the right workforce lives in disconnected systems: strategy in presentations, people in the HRIS, budgets in Finance models, skills in learning platforms, and hiring in the ATS. Leaders define ambitious business goals but lack a single, trusted view of whether they have the capabilities, skills, structure, budget, and talent required to deliver the business outcomes.</p>
+        <p>Without connected business intelligence, fundamental questions are surprisingly hard to answer: Do we have the capabilities required to deliver our strategy? Where are our biggest workforce gaps? Is our organization structured effectively? What will our workforce plan cost? What happens if we restructure a team, move roles, invest in a new capability, or change our hiring plan?</p>
+        <p><strong>The solution:</strong> NorthStar is a Business &amp; Workforce Operating System that unifies a company's business intelligence across strategy, organization, skills, finance, and talent into one integrated platform. Leaders start with where the business is going, and NorthStar turns that data into decision intelligence: the capabilities, skills, structure, workforce investment, and talent strategy required to deliver business outcomes.</p>
       </div>
       <h3 class="sub-title">Core capabilities</h3>
       <ul class="feature-list">
         <li>
           <div class="feature-check">&#10003;</div>
-          <span>Translate business goals into required organizational capabilities and workforce needs</span>
+          <span>Translate business goals and outcomes into the organizational capabilities and workforce needs required to deliver them</span>
         </li>
         <li>
           <div class="feature-check">&#10003;</div>
-          <span>Visualize the organization through interactive org charts enriched with people, skills, cost, span of control, and workforce intelligence</span>
+          <span>Visualize the organization through interactive org charts enriched with people, skills, cost, span of control, and workforce analytics</span>
         </li>
         <li>
           <div class="feature-check">&#10003;</div>
-          <span>Identify current vs. future capability and skills gaps</span>
+          <span>Quantify current vs. future capability and skills gaps with data, not opinion</span>
         </li>
         <li>
           <div class="feature-check">&#10003;</div>
@@ -445,11 +448,11 @@
         </li>
         <li>
           <div class="feature-check">&#10003;</div>
-          <span>See the real-time impact of organizational changes on headcount, payroll, spans, layers, skills, capabilities, and risk</span>
+          <span>Measure the real-time impact of organizational changes on headcount, payroll, spans, layers, skills, capabilities, and risk</span>
         </li>
         <li>
           <div class="feature-check">&#10003;</div>
-          <span>Model workforce budgets, positions, hiring plans, and financial forecasts</span>
+          <span>Model workforce budgets, positions, hiring plans, and financial forecasts against business targets</span>
         </li>
         <li>
           <div class="feature-check">&#10003;</div>
@@ -457,80 +460,25 @@
         </li>
         <li>
           <div class="feature-check">&#10003;</div>
-          <span>Understand individual and team capabilities through role-based skills intelligence</span>
+          <span>Understand individual and team capabilities through role-based skills analytics</span>
         </li>
         <li>
           <div class="feature-check">&#10003;</div>
-          <span>Connect workforce plans directly to positions, requisitions, sourcing, assessment, and hiring execution</span>
+          <span>Close the loop from workforce plan to positions, requisitions, sourcing, assessment, and hiring execution, and track results against the plan</span>
         </li>
         <li>
           <div class="feature-check">&#10003;</div>
-          <span>Use NorthStar AI to surface risks, opportunities, scenarios, and decision intelligence across the organization</span>
+          <span>Use NorthStar AI to surface risks, opportunities, scenarios, and insights across the organization's combined data</span>
         </li>
       </ul>
     </section>
 
-    <!-- PRODUCT STORIES -->
+    <!-- SCREENSHOTS -->
     <section class="section">
-      <h2 class="section-title">Product Stories</h2>
-      <div class="story">
-        <div class="story-num">1</div>
-        <div class="story-body">
-          <h3>Organization Intelligence</h3>
-          <p class="story-sub">See your organization as more than an org chart.</p>
-          <p>Explore people, roles, levels, locations, compensation, spans of control, workforce cost, skills, capabilities, and organizational structure from one connected view.</p>
-          <figure class="shot"><img src="screenshots/northstar-1.png" alt="NorthStar Organization Intelligence" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
-        </div>
-      </div>
-      <div class="story">
-        <div class="story-num">2</div>
-        <div class="story-body">
-          <h3>Team Capability Intelligence</h3>
-          <p class="story-sub">Understand how your team is built.</p>
-          <p>Give managers a Moneyball-style view of their workforce: each person's role, critical skills, capability strengths, development gaps, and where important capabilities are concentrated across the team.</p>
-          <figure class="shot"><img src="screenshots/northstar-2.png" alt="NorthStar Team Capability Intelligence" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
-        </div>
-      </div>
-      <div class="story">
-        <div class="story-num">3</div>
-        <div class="story-body">
-          <h3>Organization Sandbox</h3>
-          <p class="story-sub">Design the future organization before making the change.</p>
-          <p>Move employees, restructure teams, eliminate or create positions, change reporting lines, and model promotions in a safe sandbox environment. NorthStar recalculates the organizational impact in real time.</p>
-          <div class="story-tags">Headcount · Payroll · Management Cost · Spans · Layers · Skills · Capabilities · Talent Risk · Hiring Demand</div>
-          <figure class="shot"><img src="screenshots/northstar-3.png" alt="NorthStar Organization Sandbox" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
-        </div>
-      </div>
-      <div class="story">
-        <div class="story-num">4</div>
-        <div class="story-body">
-          <h3>Workforce &amp; Financial Planning</h3>
-          <p class="story-sub">Connect workforce decisions to financial outcomes.</p>
-          <p>Finance and business leaders can understand workforce budget, forecasted spend, position status, hiring assumptions, vacancies, compensation, geographic cost, and workforce investment.</p>
-          <figure class="shot"><img src="screenshots/northstar-4.png" alt="NorthStar Workforce and Financial Planning" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
-        </div>
-      </div>
-      <div class="story">
-        <div class="story-num">5</div>
-        <div class="story-body">
-          <h3>Workforce Scenario Intelligence</h3>
-          <p class="story-sub">Compare options before committing resources.</p>
-          <p>Model alternative strategies such as Hire, Develop, Promote, Move, Restructure, Change Location, Contract, and Automate / Redesign, then compare them across cost, capacity, capability, organization structure, time, talent availability, hiring feasibility, and risk.</p>
-          <figure class="shot"><img src="screenshots/northstar-5.png" alt="NorthStar Workforce Scenario Intelligence" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
-        </div>
-      </div>
-      <div class="story">
-        <div class="story-num">6</div>
-        <div class="story-body">
-          <h3>NorthStar AI</h3>
-          <p class="story-sub">Turn workforce data into decisions.</p>
-          <p>NorthStar AI continuously analyzes organizational, financial, skills, talent, and hiring data to surface risks and opportunities leaders may otherwise miss.</p>
-          <figure class="shot"><img src="screenshots/northstar-6.png" alt="NorthStar NorthStar AI" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
-        </div>
-      </div>
-      <div class="ai-questions">
-        <div class="aud-title">Ask NorthStar AI</div>
-        <ul><li>Where are our biggest capability gaps?</li><li>Which teams have unhealthy spans of control?</li><li>What capabilities are concentrated in only one or two employees?</li><li>Where are we forecast to exceed workforce budget?</li><li>What happens if we remove a management layer?</li><li>Which roles will we need to hire to deliver our FY27 strategy?</li><li>Could internal mobility solve some of our planned hiring demand?</li></ul>
+      <h2 class="section-title">See It in Action</h2>
+      <div class="shots stack">
+        <figure class="shot"><img src="screenshots/northstar-1.png" alt="NorthStar organization chart and scenario impact" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+        <figure class="shot"><img src="screenshots/northstar-2.png" alt="NorthStar leader profile with skills and compensation" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
       </div>
     </section>
 
@@ -540,13 +488,13 @@
       <div class="ba-grid">
         <div class="ba-card before">
           <div class="ba-label">Before</div>
-          <p>Business strategy, workforce planning, organizational design, skills, financial planning, and recruiting operate across disconnected systems. Leaders rely on spreadsheets, presentations, HR systems, Finance models, ATS data, and manual analysis to understand their workforce.</p>
-          <p style="margin-top:.7rem">Workforce planning frequently becomes a headcount budgeting exercise rather than a strategic discussion about the capabilities the company needs. Organizational changes are evaluated primarily through headcount and cost, with limited visibility into skills, capabilities, structure, talent risk, and future hiring requirements.</p>
+          <p>Business strategy, workforce planning, organizational design, skills, financial planning, and recruiting run on disconnected data. Leaders stitch together spreadsheets, presentations, HR systems, Finance models, and ATS reports by hand, and the answers are stale by the time they arrive.</p>
+          <p style="margin-top:.7rem">Workforce planning becomes a headcount budgeting exercise rather than a strategic discussion about the capabilities needed to hit business goals. Organizational changes are judged on headcount and cost alone, with limited visibility into skills, capabilities, structure, talent risk, and future hiring needs.</p>
         </div>
         <div class="ba-card after">
           <div class="ba-label">After</div>
-          <p>NorthStar creates a shared operating environment where executives, business leaders, Finance, People, and Talent teams plan the organization together. Business goals translate into Capabilities, Skills, Organization, Positions, People, Investment, Talent Strategy, and Execution.</p>
-          <p style="margin-top:.7rem">Leaders can model decisions before making them and immediately understand their impact across the organization. The result is a different workforce-planning conversation. Not simply "How many people can we afford?" but "What organization and capabilities do we need to execute our strategy, and what is the smartest way to build them?"</p>
+          <p>NorthStar creates a single source of truth where executives, business leaders, Finance, People, and Talent teams plan the organization together. Business goals flow through to capabilities, skills, organization, positions, people, investment, and talent strategy, with every decision grounded in shared data.</p>
+          <p style="margin-top:.7rem">Leaders can model decisions before making them and immediately see the impact on cost, capability, structure, and risk. The result is a different workforce-planning conversation, driven by insight rather than instinct. Not simply "How many people can we afford?" but "What organization and capabilities do we need to execute our strategy, and what is the smartest way to build them?"</p>
         </div>
       </div>
     </section>
@@ -554,32 +502,17 @@
     <!-- STRATEGIC VALUE -->
     <section class="section">
       <h2 class="section-title">Strategic Value</h2>
-      <div class="aud-grid"><div class="aud-card"><div class="aud-title">For Executives</div><p>Connect business strategy to organizational capability and workforce investment.</p></div><div class="aud-card"><div class="aud-title">For Business Leaders</div><p>Design teams, understand capabilities, model changes, and make better organizational decisions.</p></div><div class="aud-card"><div class="aud-title">For Finance</div><p>Connect headcount, positions, compensation, hiring forecasts, workforce scenarios, and budget.</p></div><div class="aud-card"><div class="aud-title">For People / HR</div><p>Understand organizational structure, skills, capabilities, internal mobility, succession, and workforce risk.</p></div><div class="aud-card"><div class="aud-title">For Talent Acquisition</div><p>Translate approved workforce plans directly into executable hiring strategies.</p></div><div class="aud-card"><div class="aud-title">For Employees</div><p>Create greater visibility into skills, development opportunities, career paths, and internal mobility.</p></div></div>
-    </section>
-
-    <!-- INTELLIGENCE MODEL -->
-    <section class="section">
-      <h2 class="section-title">Intelligence Model</h2>
-      <div class="flow-wrap">
-        <div class="flow"><div class="flow-step">Business Goals</div><div class="flow-arrow">↓</div><div class="flow-step">Capabilities</div><div class="flow-arrow">↓</div><div class="flow-step">Organization</div><div class="flow-arrow">↓</div><div class="flow-step">Skills &amp; People</div><div class="flow-arrow">↓</div><div class="flow-step">Workforce Investment</div><div class="flow-arrow">↓</div><div class="flow-step">Build · Buy · Develop · Move · Redesign</div><div class="flow-arrow">↓</div><div class="flow-step">Execution</div><div class="flow-arrow">↓</div><div class="flow-step">Business Results</div></div>
-        <div class="flow-side">NorthStar Intelligence + AI across the entire lifecycle</div>
-      </div>
+      <div class="aud-grid"><div class="aud-card"><div class="aud-title">For Executives</div><p>Connect business strategy and outcomes to organizational capability and workforce investment.</p></div><div class="aud-card"><div class="aud-title">For Leaders</div><p>Design teams, see capability gaps, model changes, and make data-driven organizational decisions.</p></div><div class="aud-card"><div class="aud-title">For Finance</div><p>Connect headcount, positions, compensation, hiring forecasts, workforce scenarios, and budget.</p></div><div class="aud-card"><div class="aud-title">For People / HR</div><p>Understand organizational structure, skills, capabilities, internal mobility, succession, and workforce risk.</p></div><div class="aud-card"><div class="aud-title">For Talent Acquisition</div><p>Translate approved workforce plans directly into executable hiring strategies.</p></div><div class="aud-card"><div class="aud-title">For Employees</div><p>Create greater visibility into skills, development opportunities, career paths, and internal mobility.</p></div></div>
     </section>
 
     <!-- DATA & INTEGRATIONS -->
     <section class="section">
       <h2 class="section-title">Data &amp; Integrations</h2>
-      <p class="prose-p">NorthStar creates an intelligence layer across the systems companies already use.</p>
+      <p class="prose-p">NorthStar unifies the business intelligence already spread across the systems companies use, turning it into one decision-ready view.</p>
       <div class="aud-grid"><div class="aud-card"><div class="aud-title">HRIS</div><p>People · Organization · Positions · Compensation</p></div><div class="aud-card"><div class="aud-title">ATS</div><p>Requisitions · Candidates · Pipelines · Hiring outcomes</p></div><div class="aud-card"><div class="aud-title">Finance</div><p>Budgets · Forecasts · Cost centers · Workforce investment</p></div><div class="aud-card"><div class="aud-title">Skills &amp; Learning</div><p>Skills · Proficiency · Development · Learning</p></div><div class="aud-card"><div class="aud-title">Compensation Intelligence</div><p>Market benchmarks · Geographic differentials · Salary ranges</p></div><div class="aud-card"><div class="aud-title">Business Systems</div><p>Goals · KPIs · Revenue · Productivity · Business outcomes</p></div></div>
-      <div class="tech-note">NorthStar becomes the decision layer connecting these systems, rather than requiring every underlying system to be replaced.</div>
+      <div class="tech-note">NorthStar becomes the decision-intelligence layer connecting these systems, rather than requiring any of them to be replaced.</div>
     </section>
 
-    <!-- CLOSING -->
-    <div class="vision-callout closing">
-      <div class="closing-title">Build the organization your strategy requires.</div>
-      <p>Companies don't win because they have the most headcount. They win because they have the right capabilities, in the right organization, with the right people, deployed against the right priorities.</p>
-      <p><strong>NorthStar gives leaders the intelligence to build it.</strong></p>
-    </div>
 
   </main>
 
