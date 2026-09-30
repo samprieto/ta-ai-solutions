@@ -699,7 +699,15 @@
       font-weight: 500;
       line-height: 1.4;
     }
-  </style>
+  
+    .shots { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:.5rem; }
+    .shot { margin:0; border:1.5px solid #e8eaed; border-radius:12px; overflow:hidden; background:#f7f8fa; }
+    .shot:first-child { grid-column:1 / -1; }
+    .shot img { display:block; width:100%; height:auto; }
+    .shot.missing { min-height:180px; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-size:.85rem; font-weight:500; }
+    .shot.missing::after { content:"Screenshot coming soon"; }
+    @media (max-width:640px){ .shots{grid-template-columns:1fr;} }
+</style>
 </head>
 <body>
 
@@ -723,11 +731,6 @@
       <div class="category-tag">Skill Assessment</div>
       <h1 class="hero-title">Language Fluency</h1>
       <p class="hero-desc">A browser-based fluency assessment: candidates record a response to a standardized prompt with zero third-party storage and full data privacy compliance.</p>
-      <div class="hero-meta">
-        <span class="status-live">Live</span>
-        <span class="meta-date">May 2026</span>
-      </div>
-      <a href="https://degreed-ta.github.io/degreed-english-assessment/" target="_blank" class="btn-primary">Open Language Fluency →</a>
     </div>
   </section>
 
@@ -766,9 +769,19 @@
         </ul>
       </div>
 
-      <!-- HOW IT HELPS -->
+      <!-- SCREENSHOTS -->
+    <div class="section">
+      <h2 class="section-title">Screenshots</h2>
+      <div class="shots">
+        <figure class="shot"><img src="screenshots/language-fluency-1.png" alt="Language Fluency screenshot 1" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+        <figure class="shot"><img src="screenshots/language-fluency-2.png" alt="Language Fluency screenshot 2" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+        <figure class="shot"><img src="screenshots/language-fluency-3.png" alt="Language Fluency screenshot 3" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+      </div>
+    </div>
+
+    <!-- HOW IT HELPS -->
       <div class="section">
-        <h2 class="section-title">How it helps the team</h2>
+        <h2 class="section-title">Business Impact</h2>
         <div class="before-after">
           <div class="ba-card before">
             <div class="ba-label">Before</div>
@@ -807,11 +820,6 @@
 
       <!-- Status + Metrics -->
       <div class="card">
-        <div class="card-header">Status</div>
-        <div class="status-row">
-          <span class="status-live">Live</span>
-          <p style="font-size:.8rem;color:var(--text-muted);margin-top:.6rem;">Since May 2026</p>
-        </div>
         <div class="card-header">Key Metrics</div>
         <div class="kpi-grid">
           <div class="kpi-cell">
@@ -831,47 +839,6 @@
             <div class="kpi-cell-label">Comparable enterprise alternatives (avg) / yr</div>
           </div>
         </div>
-      </div>
-
-      <!-- Cost Breakdown -->
-      <div class="card">
-        <div class="card-header" style="padding-bottom:10px;">Cost Breakdown</div>
-        <table class="cost-table">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Monthly</th>
-              <th>Annual</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>AI API usage</td>
-              <td class="amt">$0</td>
-              <td class="amt">$0</td>
-            </tr>
-            <tr>
-              <td>Hosting / infra</td>
-              <td class="amt">$0</td>
-              <td class="amt">$0</td>
-            </tr>
-            <tr>
-              <td>Maintenance</td>
-              <td class="amt">~0.25 hr</td>
-              <td class="amt">~4 hrs</td>
-            </tr>
-            <tr>
-              <td>Other</td>
-              <td class="amt">$0</td>
-              <td class="amt">$0</td>
-            </tr>
-            <tr class="total-row">
-              <td>TOTAL</td>
-              <td class="amt">TBD</td>
-              <td class="amt">TBD</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
 
       <!-- Enterprise Comparison -->
@@ -916,19 +883,6 @@
             <span class="label">Estimated savings</span>
             <span class="val">~$18,300 / yr</span>
           </div>
-        </div>
-      </div>
-
-      <!-- Links -->
-      <div class="card">
-        <div class="card-header">Links</div>
-        <div class="links-list">
-          <a href="https://degreed-ta.github.io/degreed-english-assessment/" target="_blank" class="link-item">
-            <span>↗</span> Open Assessment
-          </a>
-          <a href="mailto:sprieto@degreed.com" class="link-item">
-            <span>✉</span> Contact builder
-          </a>
         </div>
       </div>
 

@@ -4,7 +4,7 @@
 
 ---
 
-You are helping document an AI solution built by a Talent Acquisition team for a public-facing showcase page. Your goal is to produce a complete, ready-to-publish structured summary with as little input from me as possible.
+You are helping document an AI solution built by a Talent Attraction team for a public-facing showcase page. Your goal is to produce a complete, ready-to-publish structured summary with as little input from me as possible.
 
 ---
 

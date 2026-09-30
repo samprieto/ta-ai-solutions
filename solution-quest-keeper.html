@@ -333,7 +333,15 @@
       .ba-grid { grid-template-columns: 1fr; }
       .hero { padding: 36px 1.25rem 32px; }
     }
-  </style>
+  
+    .shots { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:.5rem; }
+    .shot { margin:0; border:1.5px solid #e8eaed; border-radius:12px; overflow:hidden; background:#f7f8fa; }
+    .shot:first-child { grid-column:1 / -1; }
+    .shot img { display:block; width:100%; height:auto; }
+    .shot.missing { min-height:180px; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-size:.85rem; font-weight:500; }
+    .shot.missing::after { content:"Screenshot coming soon"; }
+    @media (max-width:640px){ .shots{grid-template-columns:1fr;} }
+</style>
 </head>
 <body>
 
@@ -361,20 +369,6 @@
     <div class="category-tag">Work Management</div>
     <h1>Quest Keeper</h1>
     <p class="hero-desc">An AI-powered work management system that transforms daily priorities into structured, time-allocated tasks, automatically captured from screenshots, emails, meetings, and transcripts.</p>
-    <div class="hero-meta">
-      <span class="status-pill">
-        <span class="status-dot"></span>
-        In Development
-      </span>
-      <span class="hero-date">May 2026</span>
-    </div>
-    <a href="https://task-forge-saga.lovable.app/" target="_blank" class="btn-primary">
-      Preview Quest Keeper →
-    </a>
-    <div style="margin-top:.6rem;padding:.5rem .75rem;background:#f7f8fa;border:1.5px solid #e8eaed;border-radius:8px;display:inline-block;font-size:.82rem;color:var(--text-secondary);">
-      Password: <strong style="color:#111827;font-weight:700;letter-spacing:.03em;">Qk#9mX$v2pL</strong>
-    </div>
-    <p class="hero-note">Password-protected. Request access via the contact link below.</p>
   </div>
 </section>
 
@@ -417,9 +411,19 @@
       </ul>
     </section>
 
+    <!-- SCREENSHOTS -->
+    <div class="section">
+      <h2 class="section-title">Screenshots</h2>
+      <div class="shots">
+        <figure class="shot"><img src="screenshots/quest-keeper-1.png" alt="Quest Keeper screenshot 1" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+        <figure class="shot"><img src="screenshots/quest-keeper-2.png" alt="Quest Keeper screenshot 2" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+        <figure class="shot"><img src="screenshots/quest-keeper-3.png" alt="Quest Keeper screenshot 3" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+      </div>
+    </div>
+
     <!-- HOW IT HELPS -->
     <section class="section">
-      <h2 class="section-title">How it helps the team</h2>
+      <h2 class="section-title">Business Impact</h2>
 
       <div class="ba-grid">
         <div class="ba-card before">
@@ -473,16 +477,6 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
 
-    <!-- Status -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-title">Status</div>
-      <div class="sidebar-status-pill">
-        <span class="status-dot"></span>
-        In Development
-      </div>
-      <p style="font-size:.82rem; color:var(--text-muted); margin-top:6px;">Since May 2026</p>
-    </div>
-
     <!-- Key Metrics -->
     <div class="sidebar-card">
       <div class="sidebar-card-title">Key Metrics</div>
@@ -504,28 +498,6 @@
           <div class="kpi-cell-label">Comparable enterprise alternatives (avg) / yr / user</div>
         </div>
       </div>
-    </div>
-
-    <!-- Cost Breakdown -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-title">Cost Breakdown</div>
-      <table class="cost-table">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Monthly</th>
-            <th>Annual</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Lovable Pro subscription</td><td>$25</td><td>$300</td></tr>
-          <tr><td>AI vision (Gemini Flash)</td><td>~$0.10</td><td>~$1.20</td></tr>
-          <tr><td>Hosting (Lovable Cloud)</td><td>$0</td><td>$0</td></tr>
-          <tr><td>Maintenance (dev time)</td><td>~1 hr</td><td>~12 hrs</td></tr>
-          <tr><td>Domain (optional)</td><td>~$1.25</td><td>~$15</td></tr>
-          <tr class="total-row"><td>TOTAL</td><td>~$26 / mo</td><td>~$316 / yr</td></tr>
-        </tbody>
-      </table>
     </div>
 
     <!-- Enterprise Comparison -->
@@ -561,24 +533,6 @@
         <strong>Average enterprise cost:</strong> ~$312 / user / year<br>
         <strong>Our annual run cost:</strong> ~$316 / year (entire workspace, not per-user)<br>
         <strong>Estimated savings (10-person team):</strong> ~$2,800 / year vs. enterprise per-seat licensing
-      </div>
-    </div>
-
-    <!-- Links -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-title">Links</div>
-      <div class="link-list">
-        <a href="https://task-forge-saga.lovable.app/" target="_blank" class="link-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Open Quest Keeper
-        </a>
-        <div style="margin-top:.6rem;padding:.5rem .75rem;background:#f7f8fa;border:1.5px solid #e8eaed;border-radius:8px;display:inline-block;font-size:.82rem;color:var(--text-secondary);">
-          Password: <strong style="color:#111827;font-weight:700;letter-spacing:.03em;">Qk#9mX$v2pL</strong>
-        </div>
-        <a href="mailto:sprieto@degreed.com" class="link-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Contact for access
-        </a>
       </div>
     </div>
 

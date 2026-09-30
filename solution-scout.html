@@ -330,7 +330,15 @@
       .ba-grid { grid-template-columns: 1fr; }
       .hero { padding: 36px 1.25rem 32px; }
     }
-  </style>
+  
+    .shots { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:.5rem; }
+    .shot { margin:0; border:1.5px solid #e8eaed; border-radius:12px; overflow:hidden; background:#f7f8fa; }
+    .shot:first-child { grid-column:1 / -1; }
+    .shot img { display:block; width:100%; height:auto; }
+    .shot.missing { min-height:180px; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-size:.85rem; font-weight:500; }
+    .shot.missing::after { content:"Screenshot coming soon"; }
+    @media (max-width:640px){ .shots{grid-template-columns:1fr;} }
+</style>
 </head>
 <body>
 
@@ -358,16 +366,6 @@
     <div class="category-tag">Sourcing</div>
     <h1>Scout</h1>
     <p class="hero-desc">Autonomously searches public web data to find and rank the best-fit candidates for any role. No manual searching required.</p>
-    <div class="hero-meta">
-      <span class="status-pill">
-        <span class="status-dot"></span>
-        In Development
-      </span>
-      <span class="hero-date">Expected June 2026</span>
-    </div>
-    <a href="https://profile-sourcing.lovable.app/app?co=90a60d730af94f3c880cfc609bce1e9fb578649f2d882c99" target="_blank" class="btn-primary">
-      Preview Scout →
-    </a>
   </div>
 </section>
 
@@ -410,9 +408,19 @@
       </ul>
     </section>
 
+    <!-- SCREENSHOTS -->
+    <div class="section">
+      <h2 class="section-title">Screenshots</h2>
+      <div class="shots">
+        <figure class="shot"><img src="screenshots/scout-1.png" alt="Scout screenshot 1" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+        <figure class="shot"><img src="screenshots/scout-2.png" alt="Scout screenshot 2" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+        <figure class="shot"><img src="screenshots/scout-3.png" alt="Scout screenshot 3" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+      </div>
+    </div>
+
     <!-- HOW IT HELPS -->
     <section class="section">
-      <h2 class="section-title">How it helps the team</h2>
+      <h2 class="section-title">Business Impact</h2>
 
       <div class="ba-grid">
         <div class="ba-card before">
@@ -461,16 +469,6 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
 
-    <!-- Status -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-title">Status</div>
-      <div class="sidebar-status-pill">
-        <span class="status-dot"></span>
-        In Development
-      </div>
-      <p style="font-size:.82rem; color:var(--text-muted);">Expected June 2026</p>
-    </div>
-
     <!-- Key Metrics -->
     <div class="sidebar-card">
       <div class="sidebar-card-title">Key Metrics</div>
@@ -492,29 +490,6 @@
           <div class="kpi-cell-label">Comparable enterprise alternatives (avg) / yr</div>
         </div>
       </div>
-    </div>
-
-    <!-- Cost Breakdown -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-title">Cost Breakdown</div>
-      <table class="cost-table">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Monthly</th>
-            <th>Annual</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Anthropic Claude API</td><td>TBD</td><td>TBD</td></tr>
-          <tr><td>Tavily Search API</td><td>TBD</td><td>TBD</td></tr>
-          <tr><td>Cloudflare Workers</td><td>TBD</td><td>TBD</td></tr>
-          <tr><td>Supabase</td><td>TBD</td><td>TBD</td></tr>
-          <tr><td>Lovable (dev platform)</td><td>TBD</td><td>TBD</td></tr>
-          <tr><td>Maintenance (dev time)</td><td>TBD</td><td>TBD</td></tr>
-          <tr class="total-row"><td>TOTAL</td><td>TBD</td><td>TBD</td></tr>
-        </tbody>
-      </table>
     </div>
 
     <!-- Enterprise Comparison -->
@@ -550,21 +525,6 @@
         <strong>Average enterprise cost:</strong> ~$26,700 / year<br>
         <strong>Our annual run cost:</strong> TBD<br>
         <strong>Est. annual savings:</strong> TBD
-      </div>
-    </div>
-
-    <!-- Links -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-title">Links</div>
-      <div class="link-list">
-        <a href="https://profile-sourcing.lovable.app/app?co=90a60d730af94f3c880cfc609bce1e9fb578649f2d882c99" target="_blank" class="link-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Preview Scout
-        </a>
-        <a href="mailto:sprieto@degreed.com" class="link-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Contact builder
-        </a>
       </div>
     </div>
 

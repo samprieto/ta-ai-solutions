@@ -340,7 +340,15 @@
       .ba-grid { grid-template-columns: 1fr; }
       .hero { padding: 36px 1.25rem 32px; }
     }
-  </style>
+  
+    .shots { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:.5rem; }
+    .shot { margin:0; border:1.5px solid #e8eaed; border-radius:12px; overflow:hidden; background:#f7f8fa; }
+    .shot:first-child { grid-column:1 / -1; }
+    .shot img { display:block; width:100%; height:auto; }
+    .shot.missing { min-height:180px; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-size:.85rem; font-weight:500; }
+    .shot.missing::after { content:"Screenshot coming soon"; }
+    @media (max-width:640px){ .shots{grid-template-columns:1fr;} }
+</style>
 </head>
 <body>
 
@@ -368,18 +376,6 @@
     <div class="category-tag">Skill Assessment</div>
     <h1>Skill Scanner</h1>
     <p class="hero-desc">A voice-based AI interviewer that assesses candidates on up to five core role-specific skills, delivers a scored evaluation report automatically in 30 minutes, and is designed to integrate directly with Degreed's learning platform.</p>
-    <div class="hero-meta">
-      <span class="status-pill">
-        <span class="status-dot"></span>
-        In Development
-      </span>
-      <span class="hero-date">Pilot version expected June 2026</span>
-    </div>
-    <div class="coming-soon-badge">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      Coming Soon
-    </div>
-    <p class="hero-note">Internal pilot targeting June 10, 2026. No public link yet.</p>
   </div>
 </section>
 
@@ -418,9 +414,19 @@
       </ul>
     </section>
 
+    <!-- SCREENSHOTS -->
+    <div class="section">
+      <h2 class="section-title">Screenshots</h2>
+      <div class="shots">
+        <figure class="shot"><img src="screenshots/skill-scanner-1.png" alt="Skill Scanner screenshot 1" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+        <figure class="shot"><img src="screenshots/skill-scanner-2.png" alt="Skill Scanner screenshot 2" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+        <figure class="shot"><img src="screenshots/skill-scanner-3.png" alt="Skill Scanner screenshot 3" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
+      </div>
+    </div>
+
     <!-- HOW IT HELPS -->
     <section class="section">
-      <h2 class="section-title">How it helps the team</h2>
+      <h2 class="section-title">Business Impact</h2>
 
       <div class="ba-grid">
         <div class="ba-card before">
@@ -472,16 +478,6 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
 
-    <!-- Status -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-title">Status</div>
-      <div class="sidebar-status-pill">
-        <span class="status-dot"></span>
-        In Development
-      </div>
-      <p style="font-size:.82rem; color:var(--text-muted); margin-top:6px;">Pilot version expected June 2026</p>
-    </div>
-
     <!-- Key Metrics -->
     <div class="sidebar-card">
       <div class="sidebar-card-title">Key Metrics</div>
@@ -505,31 +501,11 @@
       </div>
     </div>
 
-    <!-- Cost Breakdown -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-title">Cost Breakdown</div>
-      <div class="cost-placeholder">
-        Run costs will be completed once the solution is live and measurable.
-      </div>
-    </div>
-
     <!-- Enterprise Comparison -->
     <div class="sidebar-card">
       <div class="sidebar-card-title">Enterprise Comparison</div>
       <div class="cost-placeholder">
         Enterprise comparison will be added once run costs are confirmed and the solution is fully deployed.
-      </div>
-    </div>
-
-    <!-- Links -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-title">Links</div>
-      <div class="link-list">
-        <a href="mailto:sprieto@degreed.com" class="link-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Contact builder
-        </a>
-        <p class="link-note">No live link yet. Check back after June 10.</p>
       </div>
     </div>
 
