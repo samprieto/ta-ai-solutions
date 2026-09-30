@@ -348,6 +348,7 @@
     .shot.missing { min-height:180px; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-size:.85rem; font-weight:500; }
     .shot.missing::after { content:"Screenshot coming soon"; }
     @media (max-width:640px){ .shots{grid-template-columns:1fr;} }
+    .shots.two .shot:first-child { grid-column:auto; }
 </style>
 </head>
 <body>
@@ -446,6 +447,10 @@
         </li>
         <li>
           <span class="impact-dot"></span>
+          <span>Improves the candidate experience: candidates take the interview on demand, without waiting for recruiter availability, and receive a consistent, fair evaluation</span>
+        </li>
+        <li>
+          <span class="impact-dot"></span>
           <span>Standardizes skill evaluation across all candidates and roles with consistent scoring criteria and AI-generated rubrics</span>
         </li>
         <li>
@@ -489,14 +494,6 @@
         <div class="kpi-cell">
           <div class="kpi-cell-value">TBD</div>
           <div class="kpi-cell-label">Est. saved value / yr</div>
-        </div>
-        <div class="kpi-cell">
-          <div class="kpi-cell-value">TBD</div>
-          <div class="kpi-cell-label">Est. cost / yr</div>
-        </div>
-        <div class="kpi-cell">
-          <div class="kpi-cell-value">TBD</div>
-          <div class="kpi-cell-label">Comparable enterprise alternatives (avg) / yr</div>
         </div>
       </div>
     </div>
