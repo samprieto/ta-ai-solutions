@@ -339,6 +339,8 @@
     .shot.missing::after { content:"Screenshot coming soon"; }
     @media (max-width:640px){ .shots{grid-template-columns:1fr;} }
     .shots.two .shot:first-child { grid-column:auto; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .breadcrumb a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -360,7 +362,7 @@
 <section class="hero">
   <div class="hero-inner">
     <div class="breadcrumb">
-      <span>TA AI Solutions</span>
+      <a href="index.html">TA AI Solutions</a>
       <span>›</span>
       <span>Sourcing</span>
     </div>
@@ -526,7 +528,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>&copy; 2026 Degreed TA</p>
+  <p>&copy; 2026 TA AI Solutions</p>
 </footer>
 
 </body>

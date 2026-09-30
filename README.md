@@ -1,4 +1,4 @@
-# TA AI Solutionss — GitHub Pages Deploy Guide
+# TA AI Solutions — GitHub Pages Deploy Guide
 
 This guide walks you through publishing your site for free on GitHub Pages so anyone on the internet can access it — no account required. Custom domain support is included at the end.
 

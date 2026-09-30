@@ -208,10 +208,6 @@
       font-size: 1rem; font-weight: 700; color: var(--accent);
       margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
     }
-    .vision-callout-title::before {
-      content: '&#9733;';
-      font-size: .9rem;
-    }
     .vision-callout p {
       font-size: .92rem; color: var(--text-secondary); line-height: 1.75;
     }
@@ -349,6 +345,8 @@
     .shot.missing::after { content:"Screenshot coming soon"; }
     @media (max-width:640px){ .shots{grid-template-columns:1fr;} }
     .shots.two .shot:first-child { grid-column:auto; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .breadcrumb a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -370,13 +368,13 @@
 <section class="hero">
   <div class="hero-inner">
     <div class="breadcrumb">
-      <span>TA AI Solutions</span>
+      <a href="index.html">TA AI Solutions</a>
       <span>›</span>
       <span>Skill Assessment</span>
     </div>
     <div class="category-tag">Skill Assessment</div>
     <h1>Skill Scanner</h1>
-    <p class="hero-desc">A voice-based AI interviewer that assesses candidates on up to five core role-specific skills, delivers a scored evaluation report automatically in 30 minutes, and is designed to integrate directly with Degreed's learning platform.</p>
+    <p class="hero-desc">A voice-based AI interviewer that assesses candidates on up to five core role-specific skills, delivers a scored evaluation report automatically in 30 minutes.</p>
   </div>
 </section>
 
@@ -407,10 +405,6 @@
         <li>
           <div class="feature-check">&#10003;</div>
           <span><strong>Automated transcript scoring:</strong> the system analyzes the full conversation and produces a structured skill-by-skill evaluation with AI-generated feedback and a total score</span>
-        </li>
-        <li>
-          <div class="feature-check">&#10003;</div>
-          <span><strong>Degreed platform integration (in development):</strong> assessment results are designed to push directly into candidate profiles via API or file export, connecting to the existing Maestro/Degreed platform</span>
         </li>
       </ul>
     </section>
@@ -463,7 +457,7 @@
     <!-- BEYOND HIRING: THE VISION -->
     <div class="vision-callout">
       <div class="vision-callout-title">Beyond Hiring</div>
-      <p>Skill Scanner is designed to extend well beyond the hiring decision. The long-term vision is full integration with Degreed's learning platform. When a candidate is hired, their skills have already been mapped and assessed during the process. From day one, the new hire will have a personalized learning pathway ready, based on the gaps and strengths identified during their assessment. Onboarding becomes smarter, development starts immediately, and employees hit the ground running with a clear picture of where they are and where they are going.</p>
+      <p>Skill Scanner is designed to extend well beyond the hiring decision. When a candidate is hired, their skills have already been mapped and assessed during the hiring process. From day one, the new hire will have a personalized growth pathway ready, based on the gaps and strengths identified during their assessment. Onboarding becomes smarter, development starts immediately, and employees hit the ground running with a clear picture of where they are and where they are going.</p>
     </div>
 
     <!-- TECH STACK -->
@@ -473,7 +467,6 @@
         <span class="chip">Claude (Anthropic)</span>
         <span class="chip">LiveKit</span>
         <span class="chip">Azure App Services</span>
-        <span class="chip">Degreed Maestro Platform</span>
       </div>
       <div class="tech-note">Claude powers both the real-time voice conversation logic and the post-session transcript evaluation. LiveKit handles the real-time audio layer. Azure App Services hosts the application via internal DevOps infrastructure.</div>
     </section>
@@ -502,7 +495,7 @@
     <div class="sidebar-card">
       <div class="sidebar-card-title">Enterprise Comparison</div>
       <div class="cost-placeholder">
-        Enterprise comparison will be added once run costs are confirmed and the solution is fully deployed.
+        TBD
       </div>
     </div>
 
@@ -511,7 +504,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>&copy; 2026 Degreed TA</p>
+  <p>&copy; 2026 TA AI Solutions</p>
 </footer>
 
 </body>
