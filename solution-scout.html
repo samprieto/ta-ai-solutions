@@ -341,6 +341,11 @@
     .shots.two .shot:first-child { grid-column:auto; }
     .breadcrumb a { color: var(--accent); text-decoration: none; font-weight: 500; }
     .breadcrumb a:hover { text-decoration: underline; }
+    .nav-sol { margin-right:auto; margin-left:10px; font-weight:700; font-size:1.05rem; color:var(--text-primary); display:flex; align-items:center; gap:10px; }
+    .nav-sol-sep { color:var(--text-muted); font-weight:400; }
+    nav { position: sticky; top: 0; }
+    .shots.stack { grid-template-columns:1fr; }
+    .shots.stack .shot:first-child { max-width:640px; margin:0 auto; }
 </style>
 </head>
 <body>
@@ -352,6 +357,7 @@
       <div class="nav-logo">TA</div>
       <span>TA AI Solutions</span>
     </a>
+    <span class="nav-sol"><span class="nav-sol-sep">›</span>Scout</span>
     <a href="index.html" class="nav-back">
       &#8592; Back to AI Solutions
     </a>
@@ -414,10 +420,9 @@
     <!-- SCREENSHOTS -->
     <div class="section">
       <h2 class="section-title">Screenshots</h2>
-      <div class="shots">
+      <div class="shots stack">
         <figure class="shot"><img src="screenshots/scout-1.png" alt="Scout screenshot 1" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
         <figure class="shot"><img src="screenshots/scout-2.png" alt="Scout screenshot 2" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
-        <figure class="shot"><img src="screenshots/scout-3.png" alt="Scout screenshot 3" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
       </div>
     </div>
 
@@ -516,11 +521,6 @@
           </tr>
         </tbody>
       </table>
-      <div class="savings-note">
-        <strong>Average enterprise cost:</strong> ~$26,700 / year<br>
-        <strong>Our annual run cost:</strong> TBD<br>
-        <strong>Est. annual savings:</strong> TBD
-      </div>
     </div>
 
   </aside>

@@ -708,6 +708,9 @@
     .shot.missing::after { content:"Screenshot coming soon"; }
     @media (max-width:640px){ .shots{grid-template-columns:1fr;} }
     .shots.two .shot:first-child { grid-column:auto; }
+    .nav-sol { margin-right:auto; margin-left:10px; font-weight:700; font-size:1.05rem; color:var(--text-primary); display:flex; align-items:center; gap:10px; }
+    .nav-sol-sep { color:var(--text-muted); font-weight:400; }
+    nav { position: sticky; top: 0; }
 </style>
 </head>
 <body>
@@ -718,6 +721,7 @@
       <div class="nav-logo">TA</div>
       <span class="nav-brand-text">TA AI Solutions</span>
     </a>
+    <span class="nav-sol"><span class="nav-sol-sep">›</span>Language Fluency</span>
     <a href="index.html" class="nav-back">← Back to AI Solutions</a>
   </nav>
 
@@ -776,7 +780,6 @@
       <div class="shots two">
         <figure class="shot"><img src="screenshots/language-fluency-1.png" alt="Language Fluency screenshot 1" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
         <figure class="shot"><img src="screenshots/language-fluency-2.png" alt="Language Fluency screenshot 2" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
-        <figure class="shot"><img src="screenshots/language-fluency-3.png" alt="Language Fluency screenshot 3" onerror="this.parentNode.classList.add('missing');this.remove()"></figure>
       </div>
     </div>
 

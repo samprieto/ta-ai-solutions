@@ -347,6 +347,9 @@
     .shots.two .shot:first-child { grid-column:auto; }
     .breadcrumb a { color: var(--accent); text-decoration: none; font-weight: 500; }
     .breadcrumb a:hover { text-decoration: underline; }
+    .nav-sol { margin-right:auto; margin-left:10px; font-weight:700; font-size:1.05rem; color:var(--text-primary); display:flex; align-items:center; gap:10px; }
+    .nav-sol-sep { color:var(--text-muted); font-weight:400; }
+    nav { position: sticky; top: 0; }
 </style>
 </head>
 <body>
@@ -358,6 +361,7 @@
       <div class="nav-logo">TA</div>
       <span>TA AI Solutions</span>
     </a>
+    <span class="nav-sol"><span class="nav-sol-sep">›</span>Skill Scanner</span>
     <a href="index.html" class="nav-back">
       &#8592; Back to AI Solutions
     </a>
